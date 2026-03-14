@@ -1,21 +1,26 @@
 import FadeIn from '../components/FadeIn';
 import SectionLabel from '../components/SectionLabel';
-import SystemNote from '../components/SystemNote';
 import Annotation from '../components/Annotation';
+import PhotoReveal from '../components/PhotoReveal';
+import { EvidenceTag } from '../components/EvidenceDrawer';
+import { MarginNote } from '../components/FootnoteSystem';
+import { marginNotes } from '../data/marginNotes';
 
 const talks = [
-  { event: 'DevFest Mumbai', type: 'Conference' },
-  { event: 'DevFest Bhopal', type: 'Conference' },
-  { event: 'Swift Mumbai', type: 'Meetup' },
-  { event: 'GDG MAD Mumbai', type: 'Community' },
-  { event: 'Flutter Sparks Mumbai', type: 'Meetup' },
-  { event: 'Android Developers Meetup, Pune', type: 'Community' },
+  { event: 'DevFest Mumbai', type: 'Conference', evidence: 'devfest-mumbai', photo: '/evidence/devfest-mumbai.png' },
+  { event: 'DevFest Bhopal', type: 'Conference', evidence: 'devfest-bhopal', photo: '/evidence/devfest-bhopal.png' },
+  { event: 'Swift Mumbai', type: 'Meetup', evidence: 'swift-mumbai', photo: '/evidence/swift-mumbai.png' },
+  { event: 'Swift Bengaluru', type: 'Meetup', evidence: 'swift-bengaluru', photo: '/evidence/swift-bengaluru.png' },
+  { event: 'GDG MAD Mumbai', type: 'Community', evidence: 'gdg-mad', photo: '/evidence/gdg-mad.png' },
+  { event: 'Droid Tribe', type: 'Community', evidence: 'droid-tribe', photo: '/evidence/droid-tribe.png' },
+  { event: 'Huddle @ Shaadi', type: 'Internal', evidence: 'huddle-shaadi', photo: '/evidence/huddle-shaadi.WEBP' },
 ];
 
 const mentoring = [
   {
     label: 'FOSS Hacks (Pune)',
     desc: "India's largest FOSS United hackathon. Helped teams move from abstract ideas to working prototypes.",
+    evidence: 'foss-hacks',
   },
   {
     label: 'Cyberstorm CTF',
@@ -27,13 +32,13 @@ const mentoring = [
   },
 ];
 
-export default function Speaking() {
+export default function Speaking({ openEvidence }) {
   return (
     <section id="speaking" className="relative px-6 sm:px-10 lg:px-20 py-28 sm:py-36">
       <div className="max-w-6xl mx-auto">
-        <SectionLabel label="Speaking & Mentorship" number="05" />
+        <SectionLabel label="Speaking & Mentorship" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_200px] gap-10">
           <div>
             <FadeIn>
               <h2 className="font-serif text-3xl sm:text-4xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
@@ -48,7 +53,6 @@ export default function Speaking() {
               </p>
             </FadeIn>
 
-            {/* Speaking engagements */}
             <FadeIn delay={0.1}>
               <div className="mb-12">
                 <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/40 mb-6">
@@ -58,12 +62,22 @@ export default function Speaking() {
                   {talks.map((talk, i) => (
                     <FadeIn key={talk.event} delay={i * 0.04} y={8}>
                       <div className="group flex items-center justify-between p-4 rounded-xl border border-surface-3/40 bg-surface-1/15 hover:border-surface-4/60 hover:bg-surface-1/40 transition-all duration-400">
-                        <span className="font-sans text-[13.5px] dark:text-zinc-400 text-stone-500 dark:group-hover:text-zinc-200 group-hover:text-stone-800 transition-colors">
-                          {talk.event}
-                        </span>
-                        <span className="font-mono text-[9px] uppercase tracking-wider dark:text-zinc-600 text-stone-400 px-2 py-0.5 rounded-md bg-surface-3/40">
-                          {talk.type}
-                        </span>
+                        <PhotoReveal
+                          src={talk.photo}
+                          caption={`Speaking at ${talk.event}`}
+                        >
+                          <span className="font-sans text-[13.5px] dark:text-zinc-400 text-stone-500 dark:group-hover:text-zinc-200 group-hover:text-stone-800 transition-colors">
+                            {talk.event}
+                          </span>
+                        </PhotoReveal>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-[9px] uppercase tracking-wider dark:text-zinc-600 text-stone-400 px-2 py-0.5 rounded-md bg-surface-3/40">
+                            {talk.type}
+                          </span>
+                          {talk.evidence && (
+                            <EvidenceTag evidenceKey={talk.evidence} onOpen={openEvidence} label="" />
+                          )}
+                        </div>
                       </div>
                     </FadeIn>
                   ))}
@@ -71,7 +85,6 @@ export default function Speaking() {
               </div>
             </FadeIn>
 
-            {/* Mentoring */}
             <FadeIn delay={0.15}>
               <div className="mb-12">
                 <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/40 mb-6">
@@ -81,9 +94,14 @@ export default function Speaking() {
                   {mentoring.map((item, i) => (
                     <FadeIn key={item.label} delay={i * 0.06} y={10}>
                       <div className="p-5 rounded-xl border border-surface-3/40 bg-surface-1/15 hover:border-surface-4/50 transition-all duration-400">
-                        <h4 className="font-sans text-[15px] dark:text-zinc-300 text-stone-700 mb-1.5">
-                          {item.label}
-                        </h4>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <h4 className="font-sans text-[15px] dark:text-zinc-300 text-stone-700">
+                            {item.label}
+                          </h4>
+                          {item.evidence && (
+                            <EvidenceTag evidenceKey={item.evidence} onOpen={openEvidence} />
+                          )}
+                        </div>
                         <p className="font-sans text-[13px] dark:text-zinc-500 text-stone-400 leading-relaxed">
                           {item.desc}
                         </p>
@@ -94,7 +112,6 @@ export default function Speaking() {
               </div>
             </FadeIn>
 
-            {/* Philosophy */}
             <FadeIn delay={0.2}>
               <div className="p-6 rounded-xl bg-surface-2/50 border border-surface-3/40">
                 <div className="flex items-center gap-2 mb-5">
@@ -118,14 +135,10 @@ export default function Speaking() {
             </FadeIn>
           </div>
 
-          {/* Side notes */}
-          <div className="hidden lg:flex flex-col gap-20 pt-24">
-            <SystemNote>
-              The best mentoring moment: when a stuck team stops overthinking and starts shipping.
-            </SystemNote>
-            <SystemNote>
-              Featured by Google as #AndroidSpotlight. But the real signal is when your mentees start mentoring others.
-            </SystemNote>
+          <div className="hidden xl:flex flex-col gap-20 pt-32">
+            {marginNotes.speaking.map((note) => (
+              <MarginNote key={note.id}>{note.text}</MarginNote>
+            ))}
           </div>
         </div>
       </div>

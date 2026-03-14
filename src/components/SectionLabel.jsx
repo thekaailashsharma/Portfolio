@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-export default function SectionLabel({ label, number }) {
+export default function SectionLabel({ label }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -9,11 +9,6 @@ export default function SectionLabel({ label, number }) {
       transition={{ duration: 0.5 }}
       className="flex items-center gap-4 mb-10 md:mb-14"
     >
-      {number && (
-        <span className="font-mono text-[11px] text-accent/40 tracking-wider">
-          {number}
-        </span>
-      )}
       <div className="h-px w-8 bg-gradient-to-r from-accent/25 to-transparent" />
       <span className="font-mono text-[10px] uppercase tracking-[0.25em] dark:text-zinc-500 text-stone-400">
         {label}

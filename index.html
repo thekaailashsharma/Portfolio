@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║                                                              ║
+  ║  Hey, you're viewing the source. Respect.                    ║
+  ║                                                              ║
+  ║  I'm Kailash Sharma — builder, engineer, and                 ║
+  ║  a human who loves nature and poetry.                        ║
+  ║                                                              ║
+  ║  This site was built with:                                   ║
+  ║  React · Framer Motion · Tailwind · Gemini AI               ║
+  ║  Too much coffee · Intention, not templates                  ║
+  ║                                                              ║
+  ║  Try pressing ⌘K or the Konami Code (↑↑↓↓←→←→BA)           ║
+  ║                                                              ║
+  ║  Want to talk? kailashps.1011@gmail.com                      ║
+  ║  github.com/thekaailashsharma                                ║
+  ║                                                              ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
@@ -44,7 +63,6 @@
       }
     </script>
     <style>
-      /* ---------- Dark theme (default) ---------- */
       :root, .dark {
         --surface-0: #09090b;
         --surface-1: #0f0f12;
@@ -62,13 +80,12 @@
         --grid-opacity: 0.03;
         color-scheme: dark;
       }
-      /* ---------- Light theme ---------- */
       .light {
-        --surface-0: #fafaf9;
-        --surface-1: #f5f5f4;
-        --surface-2: #e7e5e4;
-        --surface-3: #d6d3d1;
-        --surface-4: #c4c0bc;
+        --surface-0: #f7f4eb;
+        --surface-1: #f2efe4;
+        --surface-2: #e6e2d6;
+        --surface-3: #d4d0c4;
+        --surface-4: #c0bcb0;
         --accent: #8b6f47;
         --accent-dim: #6d573a;
         --accent-bright: #5c432a;
@@ -115,13 +132,24 @@
         opacity: var(--grain-opacity);
       }
 
-      /* Smooth theme transitions on key elements */
       nav, section, div, aside, article, a, span, p, h1, h2, h3, h4 {
         transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
       }
+
+      @keyframes breathe {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-4px); }
+      }
+
+      .animate-breathe { animation: breathe 3s ease-in-out infinite; }
+      .animate-float { animation: float 4s ease-in-out infinite; }
     </style>
     <script>
-      // Prevent flash: set theme class before first paint
       (function() {
         var stored = localStorage.getItem('ks-theme');
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');

@@ -23,6 +23,26 @@ const links = [
     ),
   },
   {
+    label: 'Substack',
+    href: 'https://thekailashsharma.substack.com/',
+    description: 'Product thinking & AI writing',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'Twitter / X',
+    href: 'https://x.com/thekaailash',
+    description: 'Thoughts & threads',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    ),
+  },
+  {
     label: 'Email',
     href: 'mailto:kailashps.1011@gmail.com',
     description: 'For serious conversations',
@@ -32,6 +52,12 @@ const links = [
       </svg>
     ),
   },
+];
+
+const resumes = [
+  { label: 'PM Resume', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
+  { label: 'Full Resume', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
+  { label: 'Speaker / CFP', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
 ];
 
 export default function Contact() {
@@ -53,9 +79,9 @@ export default function Contact() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.15}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-24">
-            {links.map((link, i) => (
+        <FadeIn delay={0.1}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+            {links.map((link) => (
               <motion.a
                 key={link.label}
                 href={link.href}
@@ -65,7 +91,7 @@ export default function Contact() {
                 whileHover={{ y: -3 }}
                 transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
               >
-                <div className="p-5 rounded-xl border border-surface-3/40 bg-surface-1/20 hover:bg-surface-1/60 hover:border-accent/20 transition-all duration-500">
+                <div className="p-5 rounded-xl border border-surface-3/40 bg-surface-1/20 hover:bg-surface-1/60 hover:border-accent/20 transition-all duration-500 h-full">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="dark:text-zinc-600 text-stone-300 group-hover:text-accent transition-colors duration-300">
                       {link.icon}
@@ -86,7 +112,35 @@ export default function Contact() {
           </div>
         </FadeIn>
 
-        {/* Footer */}
+        <FadeIn delay={0.2}>
+          <div className="mb-20 p-6 rounded-xl border border-surface-3/40 bg-surface-1/20">
+            <div className="flex items-center gap-2 mb-4">
+              <svg className="w-4 h-4 dark:text-zinc-500 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] dark:text-zinc-500 text-stone-400">
+                Resumes
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {resumes.map((r) => (
+                <a
+                  key={r.label}
+                  href={r.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between px-4 py-3 rounded-lg border border-surface-3/50 bg-surface-2/30 hover:bg-surface-2/60 hover:border-accent/20 transition-all duration-300"
+                >
+                  <span className="font-sans text-[13px] dark:text-zinc-300 text-stone-600 group-hover:text-accent transition-colors">
+                    {r.label}
+                  </span>
+                  <span className="text-xs dark:text-zinc-600 text-stone-400 group-hover:text-accent transition-colors">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+
         <FadeIn delay={0.3}>
           <div className="border-t border-surface-3/30 pt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
@@ -95,9 +149,14 @@ export default function Contact() {
                 Mumbai, India &middot; {new Date().getFullYear()}
               </p>
             </div>
-            <p className="font-mono text-[10px] dark:text-zinc-700 text-stone-300 tracking-wide">
-              Built with intention, not templates.
-            </p>
+            <div className="text-right sm:text-right">
+              <p className="font-mono text-[10px] dark:text-zinc-700 text-stone-300 tracking-wide italic mb-1.5">
+                A human who loves nature and poetry.
+              </p>
+              <p className="font-mono text-[8px] dark:text-zinc-800 text-stone-300/60 tracking-wider md:hidden">
+                📖 Try the book view — tap the pill nav
+              </p>
+            </div>
           </div>
         </FadeIn>
       </div>

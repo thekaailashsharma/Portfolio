@@ -1,19 +1,56 @@
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import SectionLabel from '../components/SectionLabel';
-import SystemNote from '../components/SystemNote';
 import Annotation from '../components/Annotation';
+import { Footnote, MarginNote } from '../components/FootnoteSystem';
+import { footnotes, marginNotes } from '../data/marginNotes';
+import { useGitHubStats } from '../hooks/useGitHubStats';
+
+function AnimatedNumber({ value, suffix = '' }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const duration = 1200;
+    const start = performance.now();
+    const tick = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(eased * value));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, value]);
+
+  return <span ref={ref}>{display}{suffix}</span>;
+}
+
+function BentoCell({ children, className = '', delay = 0 }) {
+  return (
+    <FadeIn delay={delay} y={16}>
+      <div className={`rounded-2xl border border-surface-3/50 bg-surface-1/30 hover:bg-surface-1/60 hover:border-surface-4/60 transition-all duration-500 p-6 h-full ${className}`}>
+        {children}
+      </div>
+    </FadeIn>
+  );
+}
 
 export default function About() {
+  const stats = useGitHubStats();
+
   return (
     <section id="about" className="relative px-6 sm:px-10 lg:px-20 py-28 sm:py-36">
       <div className="max-w-6xl mx-auto">
-        <SectionLabel label="About" number="01" />
+        <SectionLabel label="About" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12 lg:gap-20">
-          {/* Main narrative */}
-          <div className="space-y-8">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_200px] gap-10">
+          <div>
             <FadeIn>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl dark:text-zinc-100 text-stone-900 leading-[1.15] mb-8">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl dark:text-zinc-100 text-stone-900 leading-[1.15] mb-10">
                 I build things in spaces where the{' '}
                 <Annotation note="Most interesting problems don't come with a spec. They come with a constraint and a deadline. The solution reveals itself only after you start building.">
                   problem isn't fully defined
@@ -22,102 +59,135 @@ export default function About() {
               </h2>
             </FadeIn>
 
-            <FadeIn delay={0.1}>
-              <p className="font-sans text-base sm:text-[17px] dark:text-zinc-400 text-stone-500 leading-[1.8] max-w-2xl">
-                I've worked across consumer products, AI systems, and early-stage execution.
-                At{' '}
-                <Annotation note="10,000+ daily users. Real-time communication systems where trust and reliability aren't features — they're the product. Small system changes influence user behavior, drop-offs, and trust at scale.">
-                  Shaadi.com
-                </Annotation>
-                , I own real-time communication systems for 10k+ daily users.
-                At{' '}
-                <Annotation note="Designing AI systems that replace manual judgment — not demos. Validated AI outputs in production, surfaced failure modes, and iterated based on real-world behavior, not benchmarks.">
-                  Open Paws AI
-                </Annotation>
-                , I design AI that replaces manual judgment in production.
-              </p>
-            </FadeIn>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+              <BentoCell className="col-span-2 md:col-span-2 md:row-span-2" delay={0.05}>
+                <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
+                  I've worked across consumer products, AI systems, and early-stage execution.
+                  At{' '}
+                  <Annotation note="10,000+ daily users. Real-time communication systems where trust and reliability aren't features — they're the product.">
+                    Shaadi.com
+                  </Annotation>
+                  , I own real-time communication systems for 10k+ daily users.
+                  <Footnote number={footnotes['shaadi-weight'].number} text={footnotes['shaadi-weight'].text} />
+                </p>
+                <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
+                  At{' '}
+                  <Annotation note="AI Architect & Community — designing AI systems that replace manual judgment. Community-driven approach to building AI tools.">
+                    Open Paws
+                  </Annotation>
+                  , I architect AI systems and build community around open-source AI.
+                </p>
+                <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8]">
+                  I'm drawn to institution-building problems — the kind where trust, clarity, and outcomes matter more than optics.
+                </p>
+              </BentoCell>
 
-            <FadeIn delay={0.15}>
-              <p className="font-sans text-base sm:text-[17px] dark:text-zinc-400 text-stone-500 leading-[1.8] max-w-2xl">
-                Before that, I built features for{' '}
-                <Annotation note="Bank account integrations, home-screen widgets, dynamic UI components. 10k+ users. Learned that good UI is a system, not a screen.">
-                  Fold Money
-                </Annotation>
-                's 10k+ users, led product for{' '}
-                <Annotation note="US-based CRM platform. Led end-to-end development — 15+ FCM notification flows, Lead Maps, complete HubSpot integration. 200+ active users.">
-                  Leadbeam
-                </Annotation>
-                , and shipped zero-to-one products that got{' '}
-                <Annotation note="Top 100 globally in Google Solution Challenge — two consecutive years (2023 & 2024). Out of 2,000+ applicants worldwide. Featured on Google Play Academy blog and Android Developers LinkedIn as #AndroidSpotlight.">
-                  recognized globally by Google
-                </Annotation>
-                .
-              </p>
-            </FadeIn>
+              <BentoCell delay={0.1}>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Daily Impact</span>
+                <span className="font-serif text-4xl sm:text-5xl dark:text-zinc-100 text-stone-900 block mb-1">
+                  <AnimatedNumber value={10} suffix="k+" />
+                </span>
+                <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">users daily at Shaadi.com</span>
+              </BentoCell>
 
-            <FadeIn delay={0.2}>
-              <p className="font-sans text-base sm:text-[17px] dark:text-zinc-400 text-stone-500 leading-[1.8] max-w-2xl">
-                I'm drawn to{' '}
-                <Annotation note="Institution-building problems require trust, clarity, and outcomes. Optics are secondary. The work itself has to be real.">
-                  institution-building problems
-                </Annotation>
-                {' '}— the kind where trust, clarity, and outcomes matter more than optics.
-                I think clearly under pressure, extract insight from real users, and iterate
-                fast enough to learn before the window closes.
-              </p>
-            </FadeIn>
+              <BentoCell delay={0.15}>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Recognition</span>
+                <span className="font-serif text-4xl sm:text-5xl dark:text-zinc-100 text-stone-900 block mb-1">
+                  <AnimatedNumber value={2} suffix="×" />
+                </span>
+                <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">
+                  Google Top 100 globally
+                  <Footnote number={footnotes['solution-challenge'].number} text={footnotes['solution-challenge'].text} />
+                </span>
+              </BentoCell>
 
-            {/* Builder traits */}
+              <BentoCell delay={0.2} className="overflow-hidden !p-0">
+                <div className="w-full h-full min-h-[160px] bg-surface-2">
+                  <img
+                    src="/evidence/devfest-bhopal.png"
+                    alt="Kailash Sharma"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+              </BentoCell>
+
+              <BentoCell delay={0.25}>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Philosophy</span>
+                <p className="font-serif text-[16px] dark:text-zinc-300 text-stone-600 italic leading-relaxed">
+                  "You can't deliver the future if you're not in the future."
+                </p>
+              </BentoCell>
+
+              <BentoCell delay={0.12} className="col-span-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Surface Areas</span>
+                <div className="flex flex-wrap gap-2">
+                  {['AI Systems', 'Consumer Products', 'Zero-to-One', 'Android', 'iOS', 'Backend', 'Product', 'GenAI'].map((s) => (
+                    <motion.span
+                      key={s}
+                      whileHover={{ scale: 1.05, y: -1 }}
+                      className="font-mono text-[10px] px-2.5 py-1 rounded-lg bg-surface-2/60 border border-surface-3/50 dark:text-zinc-400 text-stone-500 cursor-default transition-colors hover:border-accent/30 hover:text-accent"
+                    >
+                      {s}
+                    </motion.span>
+                  ))}
+                </div>
+              </BentoCell>
+
+              <BentoCell delay={0.3} className="col-span-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Background</span>
+                <div className="flex flex-wrap gap-x-6 gap-y-2">
+                  <div>
+                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Education</span>
+                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">B.Tech AI & DS · 8.85 GPA</p>
+                  </div>
+                  <div>
+                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">GitHub</span>
+                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
+                      <AnimatedNumber value={stats.repos} /> repos · <AnimatedNumber value={stats.stars} />★
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Hackathons</span>
+                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
+                      2× Global Top 100
+                      <Footnote number={footnotes['compose-early'].number} text={footnotes['compose-early'].text} />
+                    </p>
+                  </div>
+                </div>
+              </BentoCell>
+            </div>
+
             <FadeIn delay={0.25}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-14 pt-8 border-t border-surface-3/60">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-8 border-t border-surface-3/60">
                 {[
-                  {
-                    trait: 'Builder Mindset',
-                    desc: 'I default to building. Prototypes over presentations, shipping over planning.',
-                  },
-                  {
-                    trait: 'Comfort with Ambiguity',
-                    desc: 'I operate well when the spec is thin and the constraints are thick.',
-                  },
-                  {
-                    trait: 'Product Thinking',
-                    desc: 'Every engineering decision is a product decision. I think about users first.',
-                  },
-                  {
-                    trait: 'Engineering Depth',
-                    desc: 'Android, iOS, backend, AI systems. I go where the problem needs me.',
-                  },
+                  { trait: 'Builder Mindset', desc: 'I default to building. Prototypes over presentations, shipping over planning.' },
+                  { trait: 'Comfort with Ambiguity', desc: 'I operate well when the spec is thin and the constraints are thick.' },
+                  { trait: 'Product Thinking', desc: 'Every engineering decision is a product decision. I think about users first.' },
+                  { trait: 'Engineering Depth', desc: 'Android, iOS, backend, AI systems. I go where the problem needs me.' },
                 ].map((item, i) => (
                   <FadeIn key={item.trait} delay={0.08 * i} y={10}>
-                    <div className="group p-5 rounded-xl border border-transparent hover:border-surface-4/50 hover:bg-surface-1/50 transition-all duration-500">
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      className="group p-5 rounded-xl border border-transparent hover:border-surface-4/50 hover:bg-surface-1/50 transition-all duration-500"
+                    >
                       <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/50 mb-2.5 group-hover:text-accent/70 transition-colors">
                         {item.trait}
                       </h4>
                       <p className="font-sans text-[13px] dark:text-zinc-500 text-stone-400 leading-relaxed dark:group-hover:text-zinc-400 group-hover:text-stone-600 transition-colors">
                         {item.desc}
                       </p>
-                    </div>
+                    </motion.div>
                   </FadeIn>
                 ))}
               </div>
             </FadeIn>
           </div>
 
-          {/* Side notes column */}
-          <div className="hidden lg:flex flex-col gap-20 pt-24">
-            <SystemNote>
-              GPA 8.85 — University of Mumbai.
-              But the real education happened in hackathons and production bugs.
-            </SystemNote>
-            <SystemNote>
-              Featured on official Google Play Academy blog
-              and Android Developers LinkedIn as #AndroidSpotlight.
-            </SystemNote>
-            <SystemNote>
-              1st place, Mumbai Hacks — Mumbai's largest hackathon.
-              500+ participants. Built a waste management app.
-            </SystemNote>
+          <div className="hidden xl:flex flex-col gap-16 pt-32">
+            {marginNotes.about.map((note) => (
+              <MarginNote key={note.id}>{note.text}</MarginNote>
+            ))}
           </div>
         </div>
       </div>

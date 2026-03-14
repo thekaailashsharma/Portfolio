@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kailash Sharma — Builder of Products, AI Systems, and Messy First Versions</title>
+    <meta name="description" content="Builder with experience across consumer products, AI systems, and early product execution. Exploring the mind of someone who builds." />
+    <meta name="author" content="Kailash Sharma" />
+    <meta property="og:title" content="Kailash Sharma — Builder" />
+    <meta property="og:description" content="Builder of products, AI systems, and messy first versions." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#09090b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['Instrument Serif', 'Georgia', 'serif'],
+              sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              surface: {
+                0: 'var(--surface-0)',
+                1: 'var(--surface-1)',
+                2: 'var(--surface-2)',
+                3: 'var(--surface-3)',
+                4: 'var(--surface-4)',
+              },
+              accent: {
+                DEFAULT: 'var(--accent)',
+                dim: 'var(--accent-dim)',
+                bright: 'var(--accent-bright)',
+              },
+              note: 'var(--note)',
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      /* ---------- Dark theme (default) ---------- */
+      :root, .dark {
+        --surface-0: #09090b;
+        --surface-1: #0f0f12;
+        --surface-2: #17171a;
+        --surface-3: #1e1e22;
+        --surface-4: #27272a;
+        --accent: #c8a87c;
+        --accent-dim: #a08660;
+        --accent-bright: #e8d4b4;
+        --note: #6b7280;
+        --text-primary: #e4e4e7;
+        --text-secondary: #a1a1aa;
+        --text-muted: #71717a;
+        --grain-opacity: 0.025;
+        --grid-opacity: 0.03;
+        color-scheme: dark;
+      }
+      /* ---------- Light theme ---------- */
+      .light {
+        --surface-0: #fafaf9;
+        --surface-1: #f5f5f4;
+        --surface-2: #e7e5e4;
+        --surface-3: #d6d3d1;
+        --surface-4: #c4c0bc;
+        --accent: #8b6f47;
+        --accent-dim: #6d573a;
+        --accent-bright: #5c432a;
+        --note: #78716c;
+        --text-primary: #1c1917;
+        --text-secondary: #44403c;
+        --text-muted: #78716c;
+        --grain-opacity: 0.015;
+        --grid-opacity: 0.04;
+        color-scheme: light;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; background: var(--surface-0); scrollbar-width: thin; scrollbar-color: var(--surface-4) var(--surface-0); }
+      body { background: var(--surface-0); color: var(--text-primary); font-family: 'Space Grotesk', system-ui, sans-serif; overflow-x: hidden; transition: background 0.4s ease, color 0.4s ease; }
+      ::selection { background: rgba(200, 168, 124, 0.25); color: var(--accent-bright); }
+      .light ::selection { background: rgba(139, 111, 71, 0.2); color: #1c1917; }
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: var(--surface-0); }
+      ::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--surface-3); }
+
+      @keyframes grain {
+        0%, 100% { transform: translate(0,0) }
+        10% { transform: translate(-5%,-10%) }
+        20% { transform: translate(-15%,5%) }
+        30% { transform: translate(7%,-25%) }
+        40% { transform: translate(-5%,25%) }
+        50% { transform: translate(-15%,10%) }
+        60% { transform: translate(15%,0%) }
+        70% { transform: translate(0%,15%) }
+        80% { transform: translate(3%,35%) }
+        90% { transform: translate(-10%,10%) }
+      }
+      .grain-overlay::after {
+        content: '';
+        position: fixed;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        animation: grain 8s steps(10) infinite;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: var(--grain-opacity);
+      }
+
+      /* Smooth theme transitions on key elements */
+      nav, section, div, aside, article, a, span, p, h1, h2, h3, h4 {
+        transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+      }
+    </style>
+    <script>
+      // Prevent flash: set theme class before first paint
+      (function() {
+        var stored = localStorage.getItem('ks-theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(theme);
+      })();
+    </script>
+  </head>
+  <body class="grain-overlay">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
+import { useTheme } from '../hooks/useTheme';
 
 const links = [
   {
@@ -55,12 +56,15 @@ const links = [
 ];
 
 const resumes = [
-  { label: 'PM Resume', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
-  { label: 'Full Resume', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-  { label: 'Speaker / CFP', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+  { label: 'For Innovators', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
+  { label: 'For Generalists', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
+  { label: 'For Event Organizers', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
 ];
 
 export default function Contact() {
+  const { theme } = useTheme();
+  const dark = theme === 'dark';
+
   return (
     <section id="contact" className="relative px-6 sm:px-10 lg:px-20 py-28 sm:py-36">
       <div className="max-w-4xl mx-auto">
@@ -70,12 +74,23 @@ export default function Contact() {
               // end of file
             </span>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl dark:text-zinc-100 text-stone-900 leading-tight mb-6">
-              Let&rsquo;s build something.
+              Currently exploring.
             </h2>
-            <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 max-w-md mx-auto leading-relaxed">
-              I&rsquo;m interested in hard problems, interesting teams, and work
-              that requires both product thinking and engineering depth.
+            <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 max-w-md mx-auto leading-relaxed mb-3">
+              Looking for roles in consumer products, AI systems, or platform teams
+              where product thinking and engineering depth both matter.
             </p>
+            <p className="font-sans text-[13px] dark:text-zinc-600 text-stone-400/80 max-w-sm mx-auto leading-relaxed italic mb-4">
+              If you&rsquo;re building something where the problem isn&rsquo;t fully defined yet &mdash; let&rsquo;s talk.
+            </p>
+            <a
+              href="https://wa.me/+919326405547"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-sans text-[13px] text-accent hover:text-accent-bright transition-colors"
+            >
+              Fastest way to reach me? WhatsApp ↗
+            </a>
           </div>
         </FadeIn>
 
@@ -119,7 +134,7 @@ export default function Contact() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] dark:text-zinc-500 text-stone-400">
-                Resumes
+                Proof of Work
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -142,6 +157,17 @@ export default function Contact() {
         </FadeIn>
 
         <FadeIn delay={0.3}>
+          <div className="flex justify-center mb-8">
+            <img
+              src="/sign.png"
+              alt="Kailash Sharma signature"
+              className="h-16 sm:h-20 w-auto"
+              style={{
+                filter: dark ? 'invert(1) brightness(1.2)' : 'grayscale(1) contrast(1.5) brightness(0.3)',
+                opacity: 0.6,
+              }}
+            />
+          </div>
           <div className="border-t border-surface-3/30 pt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="font-serif text-lg dark:text-zinc-400 text-stone-500 mb-1">Kailash Sharma</p>
@@ -150,11 +176,8 @@ export default function Contact() {
               </p>
             </div>
             <div className="text-right sm:text-right">
-              <p className="font-mono text-[10px] dark:text-zinc-700 text-stone-300 tracking-wide italic mb-1.5">
-                A human who loves nature and poetry.
-              </p>
-              <p className="font-mono text-[8px] dark:text-zinc-800 text-stone-300/60 tracking-wider md:hidden">
-                📖 Try the book view — tap the pill nav
+              <p className="font-mono text-[10px] dark:text-zinc-700 text-stone-300 tracking-wide italic">
+                A human who loves Product &middot; Engineering &middot; AI
               </p>
             </div>
           </div>

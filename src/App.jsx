@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from './hooks/useTheme';
 import { SoundProvider } from './components/SoundManager';
@@ -20,14 +20,26 @@ import Thinking from './sections/Thinking';
 import Contact from './sections/Contact';
 import { evidence as evidenceData } from './data/evidence';
 
-export default function App() {
+function isMobile() {
+  return typeof window !== 'undefined' && window.innerWidth < 768;
+}
+
+export default function App({ onReady }) {
   const [cmdOpen, setCmdOpen] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [activeEvidence, setActiveEvidence] = useState(null);
   const [chosenPath, setChosenPath] = useState(null);
-  const [bookMode, setBookMode] = useState(false);
+  const [bookMode, setBookMode] = useState(() => isMobile());
+
+  useEffect(() => {
+    const timer = setTimeout(() => onReady?.(), 800);
+    return () => clearTimeout(timer);
+  }, [onReady]);
 
   const handleCommandToggle = useCallback((v) => setCmdOpen(v), []);
+  const handleAIToggle = useCallback(() => setAiOpen((p) => !p), []);
+  const handleAIClose = useCallback(() => setAiOpen(false), []);
 
   const openEvidence = useCallback((key) => {
     setActiveEvidence(evidenceData[key] || null);
@@ -42,6 +54,12 @@ export default function App() {
       document.body.style.overflow = '';
     }
   }, []);
+
+  useEffect(() => {
+    if (bookMode) {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [bookMode]);
 
   const solveSections = (
     <>
@@ -97,13 +115,14 @@ export default function App() {
         <div className="min-h-screen bg-surface-0 dark:text-zinc-200 text-stone-800 font-sans antialiased">
           <EasterEggs />
           <Cursor />
-          <Nav onCommandOpen={handleCommandToggle} />
-          <CommandPalette open={cmdOpen} onClose={handleCommandToggle} />
-          <MobileNav
+          <Nav
             onCommandOpen={handleCommandToggle}
-            onBookToggle={handleBookToggle}
+            onAIToggle={handleAIToggle}
+            onBookToggle={isMobile() ? handleBookToggle : undefined}
             bookMode={bookMode}
           />
+          <CommandPalette open={cmdOpen} onClose={handleCommandToggle} />
+          <MobileNav onCommandOpen={handleCommandToggle} />
 
           <main>
             <Hero onPathChoose={setChosenPath} chosenPath={chosenPath} />
@@ -118,11 +137,14 @@ export default function App() {
             onClose={() => setEvidenceOpen(false)}
             evidence={activeEvidence}
           />
-          <AIChatbot />
+          <AIChatbot open={aiOpen} onClose={handleAIClose} />
 
           <AnimatePresence>
             {bookMode && (
-              <BookView onClose={() => handleBookToggle(false)} />
+              <BookView
+                onClose={() => handleBookToggle(false)}
+                onAIToggle={handleAIToggle}
+              />
             )}
           </AnimatePresence>
         </div>

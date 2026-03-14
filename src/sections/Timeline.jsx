@@ -27,7 +27,6 @@ const nodes = [
       'Every change is a behavioral experiment at this scale.',
     ],
     systemNote: 'First time owning systems where downtime means real human conversations are lost.',
-    evidence: 'shaadi',
     footnoteKey: 'shaadi-weight',
   },
   {
@@ -44,7 +43,6 @@ const nodes = [
       'Community-driven approach: building AI tools that serve the community, not just the org.',
     ],
     systemNote: 'Most automation demos look good in slides. Production systems expose failure modes quickly.',
-    evidence: 'openpaws',
   },
   {
     id: 'shaadi-intern',
@@ -59,7 +57,6 @@ const nodes = [
       'Performance led to promotion to SDE I within 7 months.',
     ],
     systemNote: 'I was 21 when I first owned a system that could break 10,000 conversations.',
-    evidence: 'shaadi',
   },
   {
     id: 'leadbeam',
@@ -74,7 +71,6 @@ const nodes = [
       'Streamlined CRM updates for 200+ users.',
     ],
     systemNote: 'Remote product work across time zones forces clarity in communication.',
-    evidence: 'leadbeam',
   },
   {
     id: 'my-irish-cousin',
@@ -89,7 +85,6 @@ const nodes = [
       'First experience managing a product for an international audience with different cultural expectations.',
     ],
     systemNote: 'Building for users whose context you don\'t share teaches you to rely on research over intuition.',
-    evidence: 'my-irish-cousin',
   },
   {
     id: 'fold',
@@ -104,7 +99,6 @@ const nodes = [
       'First real lesson in the difference between code that works and code that works at scale.',
     ],
     systemNote: 'Bengaluru. First time in a high-velocity startup environment.',
-    evidence: 'fold',
     footnoteKey: 'fold-bengaluru',
   },
   {
@@ -120,7 +114,6 @@ const nodes = [
       'Early experience in communicating technical ideas to non-technical audiences.',
     ],
     systemNote: 'Writing content about code made me a better coder. Teaching is the deepest form of learning.',
-    evidence: 'internshala',
   },
   {
     id: 'easocare',
@@ -135,7 +128,6 @@ const nodes = [
       'Healthcare domain added extra weight to code quality decisions.',
     ],
     systemNote: 'Healthcare app. Every bug could mean someone misses a medical alert. That changes your testing habits.',
-    evidence: 'easocare',
   },
   {
     id: 'hackathons',

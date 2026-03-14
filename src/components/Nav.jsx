@@ -50,7 +50,7 @@ function SoundToggle() {
   );
 }
 
-export default function Nav({ onCommandOpen }) {
+export default function Nav({ onCommandOpen, onAIToggle, onBookToggle, bookMode }) {
   const [scrolled, setScrolled] = useState(false);
   const { play } = useSound();
   const { scrollY } = useScroll();
@@ -68,7 +68,7 @@ export default function Nav({ onCommandOpen }) {
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.6 }}
+      transition={{ delay: 0.2, duration: 0.4 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         scrolled
           ? 'bg-surface-0/80 backdrop-blur-xl border-b border-surface-3/50'
@@ -102,6 +102,13 @@ export default function Nav({ onCommandOpen }) {
             </a>
           ))}
           <button
+            onClick={() => { onAIToggle?.(); play('open'); }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/25 bg-accent/5 hover:bg-accent/10 hover:border-accent/40 transition-all duration-300 group"
+          >
+            <span className="text-accent text-xs font-bold">✦</span>
+            <span className="font-mono text-[10px] text-accent/70 group-hover:text-accent transition-colors">AI</span>
+          </button>
+          <button
             onClick={() => { onCommandOpen?.(true); play('open'); }}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-surface-4/50 hover:border-surface-4 hover:bg-surface-2/30 transition-all duration-300 group"
           >
@@ -114,8 +121,28 @@ export default function Nav({ onCommandOpen }) {
           <ThemeToggle />
         </div>
 
-        {/* Mobile: hide default nav, MobileNav handles it */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Mobile header controls */}
+        <div className="flex md:hidden items-center gap-1.5">
+          {onBookToggle && (
+            <button
+              onClick={() => { onBookToggle(!bookMode); play('click'); }}
+              className={`w-8 h-8 flex items-center justify-center rounded-lg border transition-all duration-300 ${
+                bookMode
+                  ? 'border-accent/30 bg-accent/10'
+                  : 'border-surface-4/50 hover:border-surface-4 hover:bg-surface-2/50'
+              }`}
+              aria-label={bookMode ? 'Exit book view' : 'Enter book view'}
+            >
+              <span className="text-xs">📖</span>
+            </button>
+          )}
+          <button
+            onClick={() => { onAIToggle?.(); play('open'); }}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-accent/25 bg-accent/5 hover:bg-accent/10 transition-all duration-300"
+            aria-label="Ask AI"
+          >
+            <span className="text-accent text-xs font-bold">✦</span>
+          </button>
           <SoundToggle />
           <ThemeToggle />
         </div>

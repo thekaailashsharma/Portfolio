@@ -12,12 +12,12 @@ const sections = [
 ];
 
 const resumes = [
-  { label: 'PM Resume', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
-  { label: 'Full Resume', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-  { label: 'Speaker / CFP', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+  { label: 'For Innovators', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
+  { label: 'For Generalists', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
+  { label: 'For Event Organizers', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
 ];
 
-export default function MobileNav({ onCommandOpen, onBookToggle, bookMode }) {
+export default function MobileNav({ onCommandOpen }) {
   const [expanded, setExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { theme, toggle } = useTheme();
@@ -62,55 +62,34 @@ export default function MobileNav({ onCommandOpen, onBookToggle, bookMode }) {
 
   return (
     <>
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] md:hidden"
-      >
-        <div className="flex items-center gap-2">
-          {/* Book mode toggle */}
-          {onBookToggle && (
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => onBookToggle(!bookMode)}
-              className={`flex items-center justify-center w-10 h-10 rounded-full backdrop-blur-xl border shadow-lg transition-all duration-300 ${
-                bookMode
-                  ? 'bg-accent/15 border-accent/30 dark:shadow-black/40 shadow-stone-300/30'
-                  : 'bg-surface-1/95 border-surface-4/60 dark:shadow-black/40 shadow-stone-300/30'
-              }`}
-              aria-label={bookMode ? 'Exit book view' : 'Enter book view'}
-            >
-              <span className={`text-sm transition-colors ${bookMode ? 'text-accent' : 'dark:text-zinc-400 text-stone-500'}`}>
-                📖
-              </span>
-            </motion.button>
-          )}
-
-          {/* Main pill */}
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="relative flex items-center gap-2 px-5 py-3 rounded-full bg-surface-1/95 backdrop-blur-xl border border-surface-4/60 shadow-lg dark:shadow-black/40 shadow-stone-300/30"
+      <div className="fixed bottom-6 right-4 z-[60] md:hidden">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="relative flex items-center gap-2 px-5 py-3 rounded-full border shadow-lg"
+          style={{
+            background: theme === 'dark' ? 'rgba(19,19,21,0.95)' : 'rgba(247,244,235,0.97)',
+            borderColor: 'var(--surface-4)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          }}
+        >
+          <motion.span
+            animate={{ rotate: expanded ? 45 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-accent text-sm"
           >
-            <motion.span
-              animate={{ rotate: expanded ? 45 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-accent text-sm"
-            >
-              +
-            </motion.span>
-            <span className="font-mono text-[11px] dark:text-zinc-300 text-stone-600 tracking-wide">
-              {currentLabel}
-            </span>
-            <div className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full bg-surface-3/50 overflow-hidden">
-              <motion.div
-                className="h-full bg-accent/50 rounded-full"
-                style={{ width: progressWidth }}
-              />
-            </div>
-          </button>
-        </div>
-      </motion.div>
+            +
+          </motion.span>
+          <span className="font-mono text-[11px] dark:text-zinc-300 text-stone-600 tracking-wide">
+            {currentLabel}
+          </span>
+          <div className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full bg-surface-3/50 overflow-hidden">
+            <motion.div
+              className="h-full bg-accent/50 rounded-full"
+              style={{ width: progressWidth }}
+            />
+          </div>
+        </button>
+      </div>
 
       <AnimatePresence>
         {expanded && (
@@ -130,7 +109,13 @@ export default function MobileNav({ onCommandOpen, onBookToggle, bookMode }) {
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
               className="fixed bottom-0 left-0 right-0 z-[58] md:hidden"
             >
-              <div className="bg-surface-1/98 backdrop-blur-2xl border-t border-surface-4/60 rounded-t-3xl shadow-2xl dark:shadow-black/60 px-6 pt-4 pb-8">
+              <div
+                className="border-t rounded-t-3xl shadow-2xl px-6 pt-4 pb-8"
+                style={{
+                  background: theme === 'dark' ? 'rgba(19,19,21,0.98)' : 'rgba(247,244,235,0.99)',
+                  borderColor: 'var(--surface-4)',
+                }}
+              >
                 <div className="w-10 h-1 rounded-full bg-surface-4/60 mx-auto mb-6" />
 
                 <button
@@ -168,10 +153,9 @@ export default function MobileNav({ onCommandOpen, onBookToggle, bookMode }) {
                   ))}
                 </div>
 
-                {/* Resume links */}
                 <div className="mb-4">
                   <span className="font-mono text-[8px] uppercase tracking-[0.2em] dark:text-zinc-600 text-stone-400 block mb-2 px-1">
-                    Resumes
+                    Proof of Work
                   </span>
                   <div className="grid grid-cols-3 gap-2">
                     {resumes.map((r) => (
@@ -190,7 +174,7 @@ export default function MobileNav({ onCommandOpen, onBookToggle, bookMode }) {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-surface-3/40">
+                <div className="flex items-center justify-center pt-3 border-t border-surface-3/40">
                   <button
                     onClick={toggle}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-surface-2/50 transition-colors"
@@ -200,19 +184,6 @@ export default function MobileNav({ onCommandOpen, onBookToggle, bookMode }) {
                       {theme === 'dark' ? 'Light' : 'Dark'}
                     </span>
                   </button>
-                  {onBookToggle && (
-                    <button
-                      onClick={() => { setExpanded(false); onBookToggle(!bookMode); }}
-                      className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                        bookMode ? 'bg-accent/10' : 'hover:bg-surface-2/50'
-                      }`}
-                    >
-                      <span className="text-sm">📖</span>
-                      <span className={`font-mono text-[10px] ${bookMode ? 'text-accent' : 'dark:text-zinc-500 text-stone-400'}`}>
-                        {bookMode ? 'Exit Book' : 'Book View'}
-                      </span>
-                    </button>
-                  )}
                 </div>
               </div>
             </motion.div>

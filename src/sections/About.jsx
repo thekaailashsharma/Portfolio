@@ -62,20 +62,19 @@ export default function About() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
               <BentoCell className="col-span-2 md:col-span-2 md:row-span-2" delay={0.05}>
                 <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
-                  I've worked across consumer products, AI systems, and early-stage execution.
                   At{' '}
-                  <Annotation note="10,000+ daily users. Real-time communication systems where trust and reliability aren't features — they're the product.">
-                    Shaadi.com
+                  <Annotation note="India's largest matrimony platform. 35M+ members. Real-time communication systems where trust and reliability aren't features — they're the product.">
+                    India's largest matrimony platform
                   </Annotation>
-                  , I own real-time communication systems for 10k+ daily users.
+                  {' '}(35M+ members), I own real-time communication for 200K+ daily users.
                   <Footnote number={footnotes['shaadi-weight'].number} text={footnotes['shaadi-weight'].text} />
                 </p>
                 <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
                   At{' '}
-                  <Annotation note="AI Architect & Community — designing AI systems that replace manual judgment. Community-driven approach to building AI tools.">
+                  <Annotation note="AI Architect & Community — designing AI systems for animal advocacy. 370+ global contributors building open-source AI tools.">
                     Open Paws
                   </Annotation>
-                  , I architect AI systems and build community around open-source AI.
+                  , I architect AI systems for an open-source community of 370+ global contributors.
                 </p>
                 <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8]">
                   I'm drawn to institution-building problems — the kind where trust, clarity, and outcomes matter more than optics.
@@ -83,21 +82,20 @@ export default function About() {
               </BentoCell>
 
               <BentoCell delay={0.1}>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Daily Impact</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Daily Active Users</span>
                 <span className="font-serif text-4xl sm:text-5xl dark:text-zinc-100 text-stone-900 block mb-1">
-                  <AnimatedNumber value={10} suffix="k+" />
+                  <AnimatedNumber value={200} suffix="K+" />
                 </span>
-                <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">users daily at Shaadi.com</span>
+                <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Consumer trust platform</span>
               </BentoCell>
 
               <BentoCell delay={0.15}>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Recognition</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Intern → SDE I</span>
                 <span className="font-serif text-4xl sm:text-5xl dark:text-zinc-100 text-stone-900 block mb-1">
-                  <AnimatedNumber value={2} suffix="×" />
+                  &lt;12mo
                 </span>
                 <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">
-                  Google Top 100 globally
-                  <Footnote number={footnotes['solution-challenge'].number} text={footnotes['solution-challenge'].text} />
+                  Fastest promotion cycle
                 </span>
               </BentoCell>
 
@@ -120,9 +118,30 @@ export default function About() {
               </BentoCell>
 
               <BentoCell delay={0.12} className="col-span-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Product Impact</span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <div>
+                    <span className="font-serif text-2xl dark:text-zinc-100 text-stone-900 block">370+</span>
+                    <span className="font-mono text-[7px] sm:text-[8px] uppercase tracking-wider text-accent/50 block leading-tight">Contributors</span>
+                    <span className="font-sans text-[10px] dark:text-zinc-600 text-stone-400 hidden sm:block">Open-source AI</span>
+                  </div>
+                  <div>
+                    <span className="font-serif text-2xl dark:text-zinc-100 text-stone-900 block"><AnimatedNumber value={200} suffix="+" /></span>
+                    <span className="font-mono text-[7px] sm:text-[8px] uppercase tracking-wider text-accent/50 block leading-tight">B2B Users</span>
+                    <span className="font-sans text-[10px] dark:text-zinc-600 text-stone-400 hidden sm:block">Zero → retention</span>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1">
+                    <span className="font-serif text-2xl dark:text-zinc-100 text-stone-900 block">2024</span>
+                    <span className="font-mono text-[7px] sm:text-[8px] uppercase tracking-wider text-accent/50 block leading-tight">App of the Year</span>
+                    <span className="font-sans text-[10px] dark:text-zinc-600 text-stone-400 hidden sm:block">Google Play Best</span>
+                  </div>
+                </div>
+              </BentoCell>
+
+              <BentoCell delay={0.18} className="col-span-2">
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Surface Areas</span>
                 <div className="flex flex-wrap gap-2">
-                  {['AI Systems', 'Consumer Products', 'Zero-to-One', 'Android', 'iOS', 'Backend', 'Product', 'GenAI'].map((s) => (
+                  {['Product Strategy', 'AI Systems', 'Consumer Products', 'Zero-to-One', 'Notification Design', 'Android', 'iOS', 'GenAI'].map((s) => (
                     <motion.span
                       key={s}
                       whileHover={{ scale: 1.05, y: -1 }}
@@ -134,7 +153,7 @@ export default function About() {
                 </div>
               </BentoCell>
 
-              <BentoCell delay={0.3} className="col-span-2">
+              <BentoCell delay={0.22} className="col-span-2 md:col-span-4">
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Background</span>
                 <div className="flex flex-wrap gap-x-6 gap-y-2">
                   <div>
@@ -150,8 +169,15 @@ export default function About() {
                   <div>
                     <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Hackathons</span>
                     <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
-                      2× Global Top 100
+                      Top 100 / 4000+ teams globally
                       <Footnote number={footnotes['compose-early'].number} text={footnotes['compose-early'].text} />
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Recognition</span>
+                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
+                      1st @ National Hackathon · G20 Top 5
+                      <Footnote number={footnotes['solution-challenge'].number} text={footnotes['solution-challenge'].text} />
                     </p>
                   </div>
                 </div>

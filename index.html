@@ -18,17 +18,88 @@
   ║                                                              ║
   ╚══════════════════════════════════════════════════════════════╝
 -->
-<html lang="en" class="dark">
+<html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kailash Sharma — Builder of Products, AI Systems, and Messy First Versions</title>
-    <meta name="description" content="Builder with experience across consumer products, AI systems, and early product execution. Exploring the mind of someone who builds." />
+
+    <!-- Primary Meta -->
+    <title>Kailash Sharma — Product Builder, AI Systems, Zero-to-One Execution</title>
+    <meta name="description" content="Kailash Sharma (thekaailashsharma) — SDE at India's largest matrimony platform (200K+ DAU), AI architect, 2x Google Top 100 globally, speaker at 10+ conferences. Building products where the problem isn't fully defined yet." />
     <meta name="author" content="Kailash Sharma" />
-    <meta property="og:title" content="Kailash Sharma — Builder" />
-    <meta property="og:description" content="Builder of products, AI systems, and messy first versions." />
+    <meta name="keywords" content="thekaailashsharma, Kailash Sharma, product manager, software engineer, AI systems, Android developer, Shaadi.com, Open Paws, portfolio, Mumbai India, product builder" />
+    <link rel="canonical" href="https://thekaailashsharma.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#09090b" />
+    <meta property="og:url" content="https://thekaailashsharma.com/" />
+    <meta property="og:title" content="Kailash Sharma — Product Builder, AI Systems, Zero-to-One" />
+    <meta property="og:description" content="SDE at India's largest matrimony platform · AI Architect · 2x Google Top 100 globally · Speaker at 10+ conferences" />
+    <meta property="og:image" content="https://thekaailashsharma.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kailash Sharma — Builder · Product · AI" />
+    <meta property="og:site_name" content="Kailash Sharma" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@thekaailash" />
+    <meta name="twitter:creator" content="@thekaailash" />
+    <meta name="twitter:title" content="Kailash Sharma — Product Builder, AI Systems, Zero-to-One" />
+    <meta name="twitter:description" content="SDE at India's largest matrimony platform · AI Architect · 2x Google Top 100 globally · Speaker at 10+ conferences" />
+    <meta name="twitter:image" content="https://thekaailashsharma.com/og-image.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <meta name="theme-color" content="#f7f4eb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kailash Sharma",
+      "alternateName": "thekaailashsharma",
+      "url": "https://thekaailashsharma.com",
+      "image": "https://thekaailashsharma.com/evidence/devfest-bhopal.png",
+      "jobTitle": "Software Development Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Shaadi.com"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "SIES Graduate School of Technology"
+      },
+      "knowsAbout": ["Product Management", "AI Systems", "Android Development", "iOS Development", "Jetpack Compose", "Kotlin", "SwiftUI"],
+      "sameAs": [
+        "https://linkedin.com/in/thekaailashsharma",
+        "https://github.com/thekaailashsharma",
+        "https://x.com/thekaailash",
+        "https://thekailashsharma.substack.com"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mumbai",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kailash Sharma Portfolio",
+      "alternateName": "thekaailashsharma",
+      "url": "https://thekaailashsharma.com"
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -148,17 +219,99 @@
 
       .animate-breathe { animation: breathe 3s ease-in-out infinite; }
       .animate-float { animation: float 4s ease-in-out infinite; }
+
+      /* Splash screen */
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: opacity 0.5s ease;
+      }
+      .light #splash { background: #f7f4eb; }
+      .dark #splash { background: #09090b; }
+      #splash.fade-out { opacity: 0; pointer-events: none; }
+      #splash-monogram {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-size: 48px;
+        margin-bottom: 24px;
+        opacity: 0;
+        animation: splashFadeIn 0.6s ease 0.1s forwards;
+      }
+      .light #splash-monogram { color: #8b6f47; }
+      .dark #splash-monogram { color: #c8a87c; }
+      #splash-fact {
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-size: 13px;
+        max-width: 280px;
+        line-height: 1.7;
+        opacity: 0;
+        animation: splashFadeIn 0.6s ease 0.4s forwards;
+      }
+      .light #splash-fact { color: #78716c; }
+      .dark #splash-fact { color: #71717a; }
+      #splash-bar {
+        position: absolute;
+        bottom: 40px;
+        width: 60px;
+        height: 2px;
+        border-radius: 1px;
+        overflow: hidden;
+      }
+      .light #splash-bar { background: #d4d0c4; }
+      .dark #splash-bar { background: #27272a; }
+      #splash-bar-fill {
+        height: 100%;
+        border-radius: 1px;
+        animation: splashProgress 1.5s ease forwards;
+      }
+      .light #splash-bar-fill { background: #8b6f47; }
+      .dark #splash-bar-fill { background: #c8a87c; }
+      @keyframes splashFadeIn { to { opacity: 1; } }
+      @keyframes splashProgress { from { width: 0; } to { width: 100%; } }
     </style>
     <script>
       (function() {
         var stored = localStorage.getItem('ks-theme');
-        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        var theme = stored || 'light';
         document.documentElement.classList.remove('light', 'dark');
         document.documentElement.classList.add(theme);
       })();
     </script>
   </head>
   <body class="grain-overlay">
+    <!-- Splash screen (pure HTML/CSS, zero React dependency) -->
+    <div id="splash">
+      <div id="splash-monogram">KS</div>
+      <p id="splash-fact"></p>
+      <div id="splash-bar"><div id="splash-bar-fill"></div></div>
+    </div>
+    <script>
+      (function() {
+        var facts = [
+          "Won a national hackathon before graduating.",
+          "Promoted from intern to SDE I in under 12 months.",
+          "2× Top 100 globally in Google Solution Challenge.",
+          "Ships products used by 200K+ people daily.",
+          "Spoken at 10+ developer conferences.",
+          "Early 3% adopter of Jetpack Compose.",
+          "Presented at ISB Hyderabad for G20.",
+          "Writes about AI governance on Substack.",
+          "Featured by Google Play Academy.",
+          "Built an AI keyboard that got #AndroidSpotlight.",
+          "Architecting AI for 370+ global contributors.",
+          "Built 4 products that reached global Top 100.",
+          "An idea worth building starts with a constraint."
+        ];
+        var el = document.getElementById('splash-fact');
+        if (el) el.textContent = facts[Math.floor(Math.random() * facts.length)];
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

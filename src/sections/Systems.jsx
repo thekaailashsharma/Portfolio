@@ -85,10 +85,10 @@ export default function Systems({ openEvidence }) {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_200px] gap-10">
           <div>
             <FadeIn>
-              <h2 className="font-serif text-3xl sm:text-4xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
                 Zero-to-one execution.
               </h2>
-              <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 mb-16 max-w-lg leading-relaxed">
+              <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 mb-16 max-w-lg leading-relaxed">
                 Not a project grid. Each system started with an unclear problem and ended with something real in someone's hands.
               </p>
             </FadeIn>
@@ -111,10 +111,10 @@ export default function Systems({ openEvidence }) {
                         <div className="p-6 sm:p-7">
                           <div className="flex items-start justify-between mb-4">
                             <div>
-                              <h3 className={`font-serif text-xl sm:text-2xl transition-colors duration-300 ${isActive ? 'dark:text-zinc-100 text-stone-900' : 'dark:text-zinc-200 text-stone-700'}`}>
+                              <h3 className={`font-serif text-xl sm:text-2xl lg:text-[26px] transition-colors duration-300 ${isActive ? 'dark:text-zinc-100 text-stone-900' : 'dark:text-zinc-200 text-stone-700'}`}>
                                 {system.name}
                               </h3>
-                              <p className="font-mono text-[10px] uppercase tracking-wider text-accent/40 mt-1">
+                              <p className="font-mono text-[10px] lg:text-xs uppercase tracking-wider text-accent/40 mt-1">
                                 {system.tagline}
                               </p>
                             </div>
@@ -128,10 +128,10 @@ export default function Systems({ openEvidence }) {
                           </div>
 
                           <div className="mb-3">
-                            <span className="font-mono text-[9px] uppercase tracking-[0.2em] dark:text-zinc-600 text-stone-400 block mb-1.5">
+                            <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-[0.2em] dark:text-zinc-600 text-stone-400 block mb-1.5">
                               Problem
                             </span>
-                            <p className="font-sans text-[13px] dark:text-zinc-500 text-stone-400 leading-relaxed">
+                            <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-500 text-stone-400 leading-relaxed">
                               {system.problem}
                             </p>
                           </div>
@@ -146,13 +146,13 @@ export default function Systems({ openEvidence }) {
                                 className="overflow-hidden"
                               >
                                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, duration: 0.4 }} className="mb-4">
-                                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-1.5">Solution</span>
-                                  <p className="font-sans text-[13px] dark:text-zinc-400 text-stone-500 leading-relaxed">{system.solution}</p>
+                                  <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-accent/40 block mb-1.5">Solution</span>
+                                  <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-400 text-stone-500 leading-relaxed">{system.solution}</p>
                                 </motion.div>
 
                                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14, duration: 0.4 }} className="mb-4">
-                                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] dark:text-emerald-400/40 text-emerald-600/50 block mb-1.5">Impact</span>
-                                  <p className="font-sans text-[13px] dark:text-emerald-300/70 text-emerald-700/70 leading-relaxed">
+                                  <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-[0.2em] dark:text-emerald-400/40 text-emerald-600/50 block mb-1.5">Impact</span>
+                                  <p className="font-sans text-[13px] lg:text-[15px] dark:text-emerald-300/70 text-emerald-700/70 leading-relaxed">
                                     {system.impact}
                                     {system.footnoteKey && footnotes[system.footnoteKey] && (
                                       <Footnote number={footnotes[system.footnoteKey].number} text={footnotes[system.footnoteKey].text} />
@@ -161,8 +161,8 @@ export default function Systems({ openEvidence }) {
                                 </motion.div>
 
                                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.4 }} className="mb-5 p-3.5 rounded-lg bg-surface-3/30 border-l-2 border-accent/15">
-                                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/35 block mb-1.5">Key Learning</span>
-                                  <p className="font-sans text-[13px] dark:text-zinc-400 text-stone-500 leading-relaxed italic">{system.learning}</p>
+                                  <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-accent/35 block mb-1.5">Key Learning</span>
+                                  <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-400 text-stone-500 leading-relaxed italic">{system.learning}</p>
                                 </motion.div>
 
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} className="flex items-center gap-3 flex-wrap">

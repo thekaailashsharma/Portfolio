@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { inject } from '@vercel/analytics';
-import { injectSpeedInsights } from '@vercel/speed-insights';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
-
-inject();
-injectSpeedInsights();
 
 function dismissSplash() {
   const splash = document.getElementById('splash');
@@ -18,5 +15,7 @@ function dismissSplash() {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App onReady={dismissSplash} />
+    <Analytics />
+    <SpeedInsights />
   </React.StrictMode>
 );

@@ -202,10 +202,10 @@ export default function Timeline({ openEvidence }) {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_200px] gap-10">
           <div>
             <FadeIn>
-              <h2 className="font-serif text-3xl sm:text-4xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
                 Not a resume. A learning log.
               </h2>
-              <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 mb-6 max-w-lg leading-relaxed">
+              <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 mb-6 max-w-lg leading-relaxed">
                 Click any node to see what was actually learned — not the job description.
               </p>
             </FadeIn>
@@ -215,7 +215,7 @@ export default function Timeline({ openEvidence }) {
                 {Object.entries(branches).map(([key, b]) => (
                   <div key={key} className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: b.color, opacity: 0.6 }} />
-                    <span className="font-mono text-[9px] uppercase tracking-wider dark:text-zinc-600 text-stone-400">{b.label}</span>
+                    <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-wider dark:text-zinc-600 text-stone-400">{b.label}</span>
                   </div>
                 ))}
               </div>
@@ -243,15 +243,15 @@ export default function Timeline({ openEvidence }) {
                           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                             <div className="flex items-center gap-3 flex-wrap">
                               <span className="w-2.5 h-2.5 rounded-full shrink-0 lg:hidden" style={{ backgroundColor: branch?.color, opacity: 0.6 }} />
-                              <h3 className={`font-serif text-lg sm:text-xl transition-colors duration-300 ${isExpanded ? 'dark:text-zinc-100 text-stone-900' : 'dark:text-zinc-300 text-stone-700'}`}>
+                              <h3 className={`font-serif text-lg sm:text-xl lg:text-2xl transition-colors duration-300 ${isExpanded ? 'dark:text-zinc-100 text-stone-900' : 'dark:text-zinc-300 text-stone-700'}`}>
                                 {node.label}
                               </h3>
-                              <span className="font-mono text-[9px] px-2 py-0.5 rounded-full border uppercase tracking-wider" style={{ borderColor: `${branch?.color}33`, color: branch?.color, backgroundColor: `${branch?.color}15` }}>
+                              <span className="font-mono text-[9px] lg:text-[11px] px-2 py-0.5 rounded-full border uppercase tracking-wider" style={{ borderColor: `${branch?.color}33`, color: branch?.color, backgroundColor: `${branch?.color}15` }}>
                                 {branch?.label}
                               </span>
                             </div>
                             <div className="flex items-center gap-3 shrink-0">
-                              <span className="font-mono text-[11px] dark:text-zinc-600 text-stone-400 whitespace-nowrap">
+                              <span className="font-mono text-[11px] lg:text-[13px] dark:text-zinc-600 text-stone-400 whitespace-nowrap">
                                 {node.period}
                               </span>
                               <motion.div
@@ -266,9 +266,9 @@ export default function Timeline({ openEvidence }) {
                             </div>
                           </div>
 
-                          <p className="font-mono text-[11px] text-accent/50 mb-2">{node.role}</p>
+                          <p className="font-mono text-[11px] lg:text-[13px] text-accent/50 mb-2">{node.role}</p>
 
-                          <p className="font-sans text-[13.5px] dark:text-zinc-500 text-stone-400 italic leading-relaxed">
+                          <p className="font-sans text-[13.5px] lg:text-[15px] dark:text-zinc-500 text-stone-400 italic leading-relaxed">
                             &ldquo;{node.learning}&rdquo;
                             {node.footnoteKey && footnotes[node.footnoteKey] && (
                               <Footnote number={footnotes[node.footnoteKey].number} text={footnotes[node.footnoteKey].text} />
@@ -293,7 +293,7 @@ export default function Timeline({ openEvidence }) {
                                           initial={{ opacity: 0, x: -10 }}
                                           animate={{ opacity: 1, x: 0 }}
                                           transition={{ delay: j * 0.07, duration: 0.4 }}
-                                          className="font-sans text-[13px] dark:text-zinc-400 text-stone-500 leading-relaxed pl-3 border-l-2 transition-colors"
+                                          className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-400 text-stone-500 leading-relaxed pl-3 border-l-2 transition-colors"
                                           style={{ borderColor: `${branch?.color}30` }}
                                         >
                                           {detail}
@@ -314,7 +314,7 @@ export default function Timeline({ openEvidence }) {
                                       initial={{ opacity: 0 }}
                                       animate={{ opacity: 1 }}
                                       transition={{ delay: 0.3 }}
-                                      className="font-mono text-[10px] dark:text-zinc-600 text-stone-400 border-l border-surface-4/50 pl-3 leading-relaxed"
+                                      className="font-mono text-[10px] lg:text-xs dark:text-zinc-600 text-stone-400 border-l border-surface-4/50 pl-3 leading-relaxed"
                                     >
                                       <span className="block text-[9px] uppercase tracking-[0.25em] text-accent/25 mb-1.5">
                                         // reflection

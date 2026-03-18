@@ -10,7 +10,7 @@ export default function SectionLabel({ label }) {
       className="flex items-center gap-4 mb-10 md:mb-14"
     >
       <div className="h-px w-8 bg-gradient-to-r from-accent/25 to-transparent" />
-      <span className="font-mono text-[10px] uppercase tracking-[0.25em] dark:text-zinc-500 text-stone-400">
+      <span className="font-mono text-[10px] lg:text-xs uppercase tracking-[0.25em] dark:text-zinc-500 text-stone-400">
         {label}
       </span>
       <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-surface-4/50 to-transparent" />

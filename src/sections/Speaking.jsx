@@ -41,14 +41,14 @@ export default function Speaking({ openEvidence }) {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_200px] gap-10">
           <div>
             <FadeIn>
-              <h2 className="font-serif text-3xl sm:text-4xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl dark:text-zinc-100 text-stone-900 leading-tight mb-3 max-w-xl">
                 Teaching builders to{' '}
                 <Annotation note="Most hackathon teams fail not because of skill, but because they spend too long deciding. The ones who ship first learn first.">
                   ship faster
                 </Annotation>
                 .
               </h2>
-              <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 mb-12 max-w-lg leading-relaxed">
+              <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 mb-12 max-w-lg leading-relaxed">
                 Builder-first mentoring. Practical, execution-focused, and grounded in real constraints. No motivational fluff.
               </p>
             </FadeIn>
@@ -66,7 +66,7 @@ export default function Speaking({ openEvidence }) {
                           src={talk.photo}
                           caption={`Speaking at ${talk.event}`}
                         >
-                          <span className="font-sans text-[13.5px] dark:text-zinc-400 text-stone-500 dark:group-hover:text-zinc-200 group-hover:text-stone-800 transition-colors">
+                          <span className="font-sans text-[13.5px] lg:text-[15px] dark:text-zinc-400 text-stone-500 dark:group-hover:text-zinc-200 group-hover:text-stone-800 transition-colors">
                             {talk.event}
                           </span>
                         </PhotoReveal>
@@ -95,14 +95,14 @@ export default function Speaking({ openEvidence }) {
                     <FadeIn key={item.label} delay={i * 0.06} y={10}>
                       <div className="p-5 rounded-xl border border-surface-3/40 bg-surface-1/15 hover:border-surface-4/50 transition-all duration-400">
                         <div className="flex items-center justify-between mb-1.5">
-                          <h4 className="font-sans text-[15px] dark:text-zinc-300 text-stone-700">
+                          <h4 className="font-sans text-[15px] lg:text-base dark:text-zinc-300 text-stone-700">
                             {item.label}
                           </h4>
                           {item.evidence && (
                             <EvidenceTag evidenceKey={item.evidence} onOpen={openEvidence} />
                           )}
                         </div>
-                        <p className="font-sans text-[13px] dark:text-zinc-500 text-stone-400 leading-relaxed">
+                        <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-500 text-stone-400 leading-relaxed">
                           {item.desc}
                         </p>
                       </div>
@@ -126,7 +126,7 @@ export default function Speaking({ openEvidence }) {
                     'The best teams don\'t need motivation — they need clarity on what to build first.',
                     'Ship something ugly today. Polish it tomorrow. Overthinking kills more projects than bad code.',
                   ].map((line, i) => (
-                    <p key={i} className="font-sans text-[13px] dark:text-zinc-400 text-stone-500 leading-relaxed pl-3 border-l border-accent/12">
+                    <p key={i} className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-400 text-stone-500 leading-relaxed pl-3 border-l border-accent/12">
                       {line}
                     </p>
                   ))}

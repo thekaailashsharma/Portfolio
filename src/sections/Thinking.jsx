@@ -109,7 +109,7 @@ function WritingCard({ post, isExpanded, onToggle }) {
               }`}>
                 {post.marker}
               </span>
-              <h3 className={`font-serif text-lg sm:text-xl transition-colors duration-300 ${
+              <h3 className={`font-serif text-lg sm:text-xl lg:text-2xl transition-colors duration-300 ${
                 isExpanded ? 'dark:text-zinc-100 text-stone-900' : 'dark:text-zinc-300 text-stone-700'
               }`}>
                 {post.title}
@@ -131,7 +131,7 @@ function WritingCard({ post, isExpanded, onToggle }) {
             </motion.div>
           </div>
 
-          <p className={`font-sans text-[13.5px] leading-relaxed italic transition-colors duration-300 ${
+          <p className={`font-sans text-[13.5px] lg:text-[15px] leading-relaxed italic transition-colors duration-300 ${
             isExpanded
               ? 'dark:text-zinc-400 text-stone-500 sm:ml-8'
               : 'dark:text-zinc-500 text-stone-400'
@@ -155,7 +155,7 @@ function WritingCard({ post, isExpanded, onToggle }) {
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: j * 0.07, duration: 0.4 }}
-                      className="font-sans text-[13.5px] dark:text-zinc-400 text-stone-500 leading-[1.85]"
+                      className="font-sans text-[13.5px] lg:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.85]"
                     >
                       {paragraph}
                     </motion.p>
@@ -218,10 +218,10 @@ export default function Thinking() {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_200px] gap-10">
           <div className="max-w-4xl">
             <FadeIn>
-              <h2 className="font-serif text-3xl sm:text-4xl dark:text-zinc-100 text-stone-900 leading-tight mb-3">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl dark:text-zinc-100 text-stone-900 leading-tight mb-3">
                 Thinking out loud.
               </h2>
-              <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 mb-6 max-w-lg leading-relaxed">
+              <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 mb-6 max-w-lg leading-relaxed">
                 Product thinking, AI, and building — published on{' '}
                 <a
                   href="https://thekailashsharma.substack.com/"

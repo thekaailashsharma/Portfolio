@@ -1,10 +1,12 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
+import { usePersona } from '../context/PersonaContext';
 import NowDashboard from '../components/NowDashboard';
 import PathChooser from '../components/PathChooser';
 
 export default function Hero({ onPathChoose, chosenPath }) {
   const { theme } = useTheme();
+  const { persona, loading } = usePersona();
   const { scrollY } = useScroll();
 
   const nameScale = useTransform(scrollY, [0, 400], [1, 0.4]);
@@ -52,7 +54,7 @@ export default function Hero({ onPathChoose, chosenPath }) {
         </motion.div>
 
         <div className="border-l-2 pl-5 sm:pl-6 mb-4 max-w-lg" style={{ borderColor: 'var(--accent)' }}>
-          <p className="font-serif italic text-[15px] sm:text-[17px] leading-[1.7] dark:text-zinc-300 text-stone-700">
+          <p className="font-serif italic text-[15px] sm:text-[17px] lg:text-[19px] leading-[1.7] dark:text-zinc-300 text-stone-700">
             "Innovation is outcome of a habit, not a random act. To invent tomorrow is a great achievement than modifying the past."
           </p>
         </div>
@@ -69,18 +71,28 @@ export default function Hero({ onPathChoose, chosenPath }) {
         </div>
 
         <div className="space-y-1 mb-10">
-          {[
-            'I like working on unclear problems.',
-            'The kind where the solution is not obvious',
-            'and the constraints are real.',
-          ].map((text, i) => (
-            <p
-              key={i}
-              className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 leading-relaxed"
+          {persona?.heroSubtitle ? (
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="font-sans text-[15px] lg:text-[17px] dark:text-zinc-400 text-stone-500 leading-relaxed max-w-lg"
             >
-              {text}
-            </p>
-          ))}
+              {loading ? 'Personalizing...' : persona.heroSubtitle}
+            </motion.p>
+          ) : (
+            ['I like working on unclear problems.',
+             'The kind where the solution is not obvious',
+             'and the constraints are real.',
+            ].map((text, i) => (
+              <p
+                key={i}
+                className="font-sans text-[15px] lg:text-[17px] dark:text-zinc-500 text-stone-400 leading-relaxed"
+              >
+                {text}
+              </p>
+            ))
+          )}
         </div>
 
         <div className="flex flex-wrap gap-4">
@@ -88,7 +100,7 @@ export default function Hero({ onPathChoose, chosenPath }) {
             href="#systems"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-accent/10 border border-accent/20 rounded-lg text-accent text-[13px] font-sans hover:bg-accent/15 hover:border-accent/35 transition-all duration-300"
+            className="group inline-flex items-center gap-2.5 px-6 py-3 bg-accent/10 border border-accent/20 rounded-lg text-accent text-[13px] lg:text-[15px] font-sans hover:bg-accent/15 hover:border-accent/35 transition-all duration-300"
           >
             Explore Work
             <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
@@ -99,7 +111,7 @@ export default function Hero({ onPathChoose, chosenPath }) {
             href="#writing"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="group inline-flex items-center gap-2.5 px-6 py-3 border border-surface-4/60 rounded-lg dark:text-zinc-400 text-stone-500 text-[13px] font-sans hover:border-surface-4 dark:hover:text-zinc-300 hover:text-stone-700 transition-all duration-300"
+            className="group inline-flex items-center gap-2.5 px-6 py-3 border border-surface-4/60 rounded-lg dark:text-zinc-400 text-stone-500 text-[13px] lg:text-[15px] font-sans hover:border-surface-4 dark:hover:text-zinc-300 hover:text-stone-700 transition-all duration-300"
           >
             Read Writing
             <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">

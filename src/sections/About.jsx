@@ -61,7 +61,7 @@ export default function About() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
               <BentoCell className="col-span-2 md:col-span-2 md:row-span-2" delay={0.05}>
-                <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
+                <p className="font-sans text-[14px] sm:text-[15px] lg:text-base dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
                   At{' '}
                   <Annotation note="India's largest matrimony platform. 35M+ members. Real-time communication systems where trust and reliability aren't features — they're the product.">
                     India's largest matrimony platform
@@ -69,28 +69,28 @@ export default function About() {
                   {' '}(35M+ members), I own real-time communication for 200K+ daily users.
                   <Footnote number={footnotes['shaadi-weight'].number} text={footnotes['shaadi-weight'].text} />
                 </p>
-                <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
+                <p className="font-sans text-[14px] sm:text-[15px] lg:text-base dark:text-zinc-400 text-stone-500 leading-[1.8] mb-4">
                   At{' '}
                   <Annotation note="AI Architect & Community — designing AI systems for animal advocacy. 370+ global contributors building open-source AI tools.">
                     Open Paws
                   </Annotation>
                   , I architect AI systems for an open-source community of 370+ global contributors.
                 </p>
-                <p className="font-sans text-[14px] sm:text-[15px] dark:text-zinc-400 text-stone-500 leading-[1.8]">
+                <p className="font-sans text-[14px] sm:text-[15px] lg:text-base dark:text-zinc-400 text-stone-500 leading-[1.8]">
                   I'm drawn to institution-building problems — the kind where trust, clarity, and outcomes matter more than optics.
                 </p>
               </BentoCell>
 
               <BentoCell delay={0.1}>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Daily Active Users</span>
+                <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Daily Active Users</span>
                 <span className="font-serif text-4xl sm:text-5xl dark:text-zinc-100 text-stone-900 block mb-1">
                   <AnimatedNumber value={200} suffix="K+" />
                 </span>
-                <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Consumer trust platform</span>
+                <span className="font-sans text-[12px] lg:text-[13px] dark:text-zinc-500 text-stone-400">Consumer trust platform</span>
               </BentoCell>
 
               <BentoCell delay={0.15}>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Intern → SDE I</span>
+                <span className="font-mono text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Intern → SDE I</span>
                 <span className="font-serif text-4xl sm:text-5xl dark:text-zinc-100 text-stone-900 block mb-1">
                   &lt;12mo
                 </span>
@@ -157,25 +157,25 @@ export default function About() {
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Background</span>
                 <div className="flex flex-wrap gap-x-6 gap-y-2">
                   <div>
-                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Education</span>
-                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">B.Tech AI & DS · 8.85 GPA</p>
+                    <span className="font-sans text-[12px] lg:text-[13px] dark:text-zinc-500 text-stone-400">Education</span>
+                    <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-300 text-stone-600">B.Tech AI & DS · 8.85 GPA</p>
                   </div>
                   <div>
-                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">GitHub</span>
-                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
+                    <span className="font-sans text-[12px] lg:text-[13px] dark:text-zinc-500 text-stone-400">GitHub</span>
+                    <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-300 text-stone-600">
                       <AnimatedNumber value={stats.repos} /> repos · <AnimatedNumber value={stats.stars} />★
                     </p>
                   </div>
                   <div>
-                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Hackathons</span>
-                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
+                    <span className="font-sans text-[12px] lg:text-[13px] dark:text-zinc-500 text-stone-400">Hackathons</span>
+                    <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-300 text-stone-600">
                       Top 100 / 4000+ teams globally
                       <Footnote number={footnotes['compose-early'].number} text={footnotes['compose-early'].text} />
                     </p>
                   </div>
                   <div>
-                    <span className="font-sans text-[12px] dark:text-zinc-500 text-stone-400">Recognition</span>
-                    <p className="font-sans text-[13px] dark:text-zinc-300 text-stone-600">
+                    <span className="font-sans text-[12px] lg:text-[13px] dark:text-zinc-500 text-stone-400">Recognition</span>
+                    <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-300 text-stone-600">
                       1st @ National Hackathon · G20 Top 5
                       <Footnote number={footnotes['solution-challenge'].number} text={footnotes['solution-challenge'].text} />
                     </p>
@@ -197,10 +197,10 @@ export default function About() {
                       whileHover={{ y: -2 }}
                       className="group p-5 rounded-xl border border-transparent hover:border-surface-4/50 hover:bg-surface-1/50 transition-all duration-500"
                     >
-                      <h4 className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent/50 mb-2.5 group-hover:text-accent/70 transition-colors">
+                      <h4 className="font-mono text-[10px] lg:text-[12px] uppercase tracking-[0.2em] text-accent/50 mb-2.5 group-hover:text-accent/70 transition-colors">
                         {item.trait}
                       </h4>
-                      <p className="font-sans text-[13px] dark:text-zinc-500 text-stone-400 leading-relaxed dark:group-hover:text-zinc-400 group-hover:text-stone-600 transition-colors">
+                      <p className="font-sans text-[13px] lg:text-[15px] dark:text-zinc-500 text-stone-400 leading-relaxed dark:group-hover:text-zinc-400 group-hover:text-stone-600 transition-colors">
                         {item.desc}
                       </p>
                     </motion.div>

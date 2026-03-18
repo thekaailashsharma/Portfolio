@@ -76,7 +76,7 @@ export default function Contact() {
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl dark:text-zinc-100 text-stone-900 leading-tight mb-6">
               Currently exploring.
             </h2>
-            <p className="font-sans text-[15px] dark:text-zinc-500 text-stone-400 max-w-md mx-auto leading-relaxed mb-3">
+            <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 max-w-md mx-auto leading-relaxed mb-3">
               Looking for roles in consumer products, AI systems, or platform teams
               where product thinking and engineering depth both matter.
             </p>

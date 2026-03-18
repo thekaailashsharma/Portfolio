@@ -95,7 +95,7 @@ export default function Nav({ onCommandOpen, onAIToggle, onBookToggle, bookMode 
               key={item.label}
               href={item.href}
               onClick={() => play('click')}
-              className="relative font-mono text-[11px] uppercase tracking-[0.15em] dark:text-zinc-500 text-stone-400 dark:hover:text-zinc-300 hover:text-stone-700 transition-colors duration-300 group py-1"
+              className="relative font-mono text-[11px] lg:text-xs uppercase tracking-[0.15em] dark:text-zinc-500 text-stone-400 dark:hover:text-zinc-300 hover:text-stone-700 transition-colors duration-300 group py-1"
             >
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-px bg-accent/50 group-hover:w-full transition-all duration-300 ease-out" />

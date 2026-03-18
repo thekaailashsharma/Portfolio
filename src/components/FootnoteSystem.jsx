@@ -45,7 +45,7 @@ export function MarginNote({ children, side = 'right' }) {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-      className="hidden xl:block font-mono text-[10px] leading-relaxed dark:text-zinc-600 text-stone-400 border-l border-accent/15 pl-3 max-w-[220px] hover:border-accent/40 hover:dark:text-zinc-500 hover:text-stone-500 transition-all duration-500 select-none"
+      className="hidden xl:block font-mono text-[10px] lg:text-xs leading-relaxed dark:text-zinc-600 text-stone-400 border-l border-accent/15 pl-3 max-w-[220px] hover:border-accent/40 hover:dark:text-zinc-500 hover:text-stone-500 transition-all duration-500 select-none"
     >
       <span className="italic">{children}</span>
     </motion.aside>

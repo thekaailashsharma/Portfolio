@@ -21,7 +21,7 @@
 <html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- Primary Meta -->
     <title>Kailash Sharma — Product Builder, AI Systems, Zero-to-One Execution</title>
@@ -155,37 +155,37 @@
     </script>
     <style>
       :root, .dark {
-        --surface-0: #09090b;
-        --surface-1: #0f0f12;
-        --surface-2: #17171a;
-        --surface-3: #1e1e22;
-        --surface-4: #27272a;
-        --accent: #c8a87c;
-        --accent-dim: #a08660;
-        --accent-bright: #e8d4b4;
-        --note: #6b7280;
-        --text-primary: #e4e4e7;
-        --text-secondary: #a1a1aa;
-        --text-muted: #71717a;
-        --grain-opacity: 0.025;
-        --grid-opacity: 0.03;
+        --surface-0: #1A1510;
+        --surface-1: #26201A;
+        --surface-2: #332B20;
+        --surface-3: #453A2B;
+        --surface-4: #5A4A36;
+        --accent: #E0683A;
+        --accent-dim: #C8502A;
+        --accent-bright: #F08A5A;
+        --note: #8A8175;
+        --text-primary: #F2ECDD;
+        --text-secondary: #C3B8A6;
+        --text-muted: #8A8175;
+        --grain-opacity: 0.03;
+        --grid-opacity: 0.04;
         color-scheme: dark;
       }
       .light {
-        --surface-0: #f7f4eb;
-        --surface-1: #f2efe4;
-        --surface-2: #e6e2d6;
-        --surface-3: #d4d0c4;
-        --surface-4: #c0bcb0;
-        --accent: #8b6f47;
-        --accent-dim: #6d573a;
-        --accent-bright: #5c432a;
-        --note: #78716c;
-        --text-primary: #1c1917;
-        --text-secondary: #44403c;
-        --text-muted: #78716c;
-        --grain-opacity: 0.015;
-        --grid-opacity: 0.04;
+        --surface-0: #f5f1e6;
+        --surface-1: #efe9da;
+        --surface-2: #e4ddc9;
+        --surface-3: #cfc7b2;
+        --surface-4: #b6ac93;
+        --accent: #c2410c;          /* vivid terracotta — visible & warm on beige */
+        --accent-dim: #9a3412;
+        --accent-bright: #ea580c;
+        --note: #6b5d4c;
+        --text-primary: #1a1410;
+        --text-secondary: #3d342a;
+        --text-muted: #6b5d4c;
+        --grain-opacity: 0.02;
+        --grid-opacity: 0.05;
         color-scheme: light;
       }
 
@@ -293,6 +293,105 @@
       .dark #splash-bar-fill { background: #c8a87c; }
       @keyframes splashFadeIn { to { opacity: 1; } }
       @keyframes splashProgress { from { width: 0; } to { width: 100%; } }
+
+      /* ============================================================
+         VISIBILITY + GLASS + COLOR pass — layout untouched, beige kept
+         ============================================================ */
+
+      /* 1) MORE COLOR — gentle multi-hue washes over the beige, fixed,
+            sitting behind all content (gives glass something to refract) */
+      .light .bg-surface-0 {
+        background-image:
+          radial-gradient(48vw 38vw at -5% -5%,  rgba(234,88,12,.12),  transparent 55%),
+          radial-gradient(44vw 40vw at 105% 18%, rgba(13,148,136,.10), transparent 55%),
+          radial-gradient(46vw 42vw at 50% 108%, rgba(139,92,246,.09), transparent 60%),
+          radial-gradient(40vw 36vw at 20% 60%,  rgba(217,119,6,.07),  transparent 58%);
+        background-attachment: fixed;
+      }
+      .dark .bg-surface-0 {
+        background-image:
+          radial-gradient(48vw 38vw at -5% -5%,  rgba(234,88,12,.10),  transparent 55%),
+          radial-gradient(44vw 40vw at 105% 18%, rgba(45,212,191,.07), transparent 55%),
+          radial-gradient(46vw 42vw at 50% 108%, rgba(139,92,246,.08), transparent 60%);
+        background-attachment: fixed;
+      }
+
+      /* 2) REAL GLASS — every translucent surface card becomes frosted glass */
+      [class*="bg-surface-1/"],
+      [class*="bg-surface-2/"],
+      [class*="bg-surface-3/"] {
+        -webkit-backdrop-filter: blur(12px) saturate(155%);
+                backdrop-filter: blur(12px) saturate(155%);
+      }
+      /* glossy top edge so glass reads as glass */
+      .light [class*="rounded-"][class*="bg-surface-1/"],
+      .light [class*="rounded-"][class*="bg-surface-2/"] {
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 8px 24px -12px rgba(60,40,20,.18);
+      }
+      .dark [class*="rounded-"][class*="bg-surface-1/"],
+      .dark [class*="rounded-"][class*="bg-surface-2/"] {
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 12px 30px -14px rgba(0,0,0,.5);
+      }
+
+      /* 3) MORE VISIBLE — lift the low-contrast body text in light/beige mode */
+      .light .text-stone-300 { color: #8c8073 !important; }
+      .light .text-stone-400 { color: #6b5d4c !important; }
+      .light .text-stone-500 { color: #534739 !important; }
+      .light .text-stone-600 { color: #3d342a !important; }
+      /* dark mode: warm up + lift faded zinc grays so text isn't lost on the charcoal */
+      .dark .text-zinc-700 { color: #9a8f7d !important; }
+      .dark .text-zinc-600 { color: #ab9f8b !important; }
+      .dark .text-zinc-500 { color: #c2b7a3 !important; }
+      .dark .text-zinc-400 { color: #d8ceba !important; }
+      /* stronger card definition so edges are visible on beige */
+      .light [class*="border-surface-3/"],
+      .light [class*="border-surface-4/"] { border-color: rgba(120,95,60,.28) !important; }
+      /* the accent works harder: brighter selection + bolder accent text */
+      .light .text-accent\/40 { color: rgba(194,65,12,.7) !important; }
+      .light .text-accent\/50 { color: rgba(194,65,12,.8) !important; }
+
+      /* ===== Liquid-glass panel utilities (modals, overlays, big surfaces) ===== */
+      /* LIQUID GLASS (Aave method): transparent + refractive (SVG displacement) + specular edges */
+      .glass-panel {
+        background: rgba(247,243,233,0.86);
+        -webkit-backdrop-filter: blur(30px) saturate(140%);
+                backdrop-filter: blur(30px) saturate(140%);
+        border: 1px solid rgba(255,255,255,.6);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.95),     /* top rim light */
+          inset 1px 0 0 rgba(255,255,255,.35),      /* left specular */
+          inset -1px 0 0 rgba(255,255,255,.35),     /* right specular */
+          inset 0 -1px 2px rgba(255,255,255,.25),
+          0 30px 70px -25px rgba(33,27,22,.5);
+      }
+      .dark .glass-panel {
+        background: rgba(28,23,17,0.9);
+        border-color: rgba(255,255,255,.16);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.22),
+          inset 1px 0 0 rgba(255,255,255,.08),
+          inset -1px 0 0 rgba(255,255,255,.08),
+          0 30px 70px -25px rgba(0,0,0,.7);
+      }
+      /* @supports fallback: browsers without SVG-backdrop still get frosted glass */
+      @supports not (backdrop-filter: url(#liquid-panel)) {
+        .glass-panel { -webkit-backdrop-filter: blur(22px) saturate(180%); backdrop-filter: blur(22px) saturate(180%); }
+      }
+      /* slow rim-light sweep for headers / primary CTAs */
+      .glass-sheen { position: relative; overflow: hidden; }
+      .glass-sheen::after {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.35) 48%, transparent 62%);
+        transform: translateX(-130%); animation: sheen 7s ease-in-out infinite;
+      }
+      @keyframes sheen { 0%,70%,100% { transform: translateX(-130%); } 82% { transform: translateX(130%); } }
+      .media-duotone { filter: contrast(1.06) saturate(1.02); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .grain-overlay::after { animation: none; }
+        .glass-sheen::after { animation: none; opacity: 0; }
+        *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      }
     </style>
     <script>
       (function() {

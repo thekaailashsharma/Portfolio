@@ -16,6 +16,7 @@ import PresentationViewer from './components/PresentationViewer';
 import PersonaBanner from './components/PersonaBanner';
 import { usePersona } from './context/PersonaContext';
 import Hero from './sections/Hero';
+import CaseStudy from './sections/CaseStudy';
 import About from './sections/About';
 import Timeline from './sections/Timeline';
 import Systems from './sections/Systems';
@@ -27,6 +28,19 @@ import { evidence as evidenceData } from './data/evidence';
 function isMobile() {
   return typeof window !== 'undefined' && window.innerWidth < 768;
 }
+
+// Lens displacement map: red = horizontal bend, green = vertical bend, neutral (128) centre.
+// Edges diverge from 128 so the backdrop refracts inward like a real glass lens (Aave technique).
+const GLASS_MAP = 'data:image/svg+xml,' + encodeURIComponent(
+  "<svg xmlns='http://www.w3.org/2000/svg' width='240' height='180'>" +
+  "<defs>" +
+  "<linearGradient id='rx' x1='0' y1='0' x2='1' y2='0'><stop offset='0' stop-color='rgb(255,0,0)'/><stop offset='0.5' stop-color='rgb(128,0,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient>" +
+  "<linearGradient id='gy' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='rgb(0,255,0)'/><stop offset='0.5' stop-color='rgb(0,128,0)'/><stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient>" +
+  "</defs>" +
+  "<rect width='240' height='180' fill='url(#rx)'/>" +
+  "<rect width='240' height='180' fill='url(#gy)' style='mix-blend-mode:screen'/>" +
+  "</svg>"
+);
 
 const SECTION_MAP = {
   about: (openEvidence) => <About key="about" />,
@@ -49,7 +63,7 @@ export default function App({ onReady }) {
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [activeEvidence, setActiveEvidence] = useState(null);
   const [chosenPath, setChosenPath] = useState(null);
-  const [bookMode, setBookMode] = useState(() => isMobile());
+  const [bookMode, setBookMode] = useState(false);
   const { persona } = usePersona();
 
   useEffect(() => {
@@ -114,8 +128,21 @@ export default function App({ onReady }) {
           <meta name="twitter:description" content={ogDesc} />
         </Helmet>
         <div className="min-h-screen bg-surface-0 dark:text-zinc-200 text-stone-800 font-sans antialiased">
+          {/* Global liquid-glass (Aave method): a lens displacement map — R/G channels bend
+              content horizontally/vertically, neutral (128) in the centre so edges refract inward. */}
+          <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden>
+            <filter id="liquid" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+              <feImage href={GLASS_MAP} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="m" />
+              <feGaussianBlur in="m" stdDeviation="0.6" result="mb" />
+              <feDisplacementMap in="SourceGraphic" in2="mb" scale="16" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+            <filter id="liquid-panel" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+              <feImage href={GLASS_MAP} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="m" />
+              <feGaussianBlur in="m" stdDeviation="0.8" result="mb" />
+              <feDisplacementMap in="SourceGraphic" in2="mb" scale="10" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </svg>
           <EasterEggs />
-          <Cursor />
           <Nav
             onCommandOpen={handleCommandToggle}
             onAIToggle={handleAIToggle}
@@ -128,6 +155,7 @@ export default function App({ onReady }) {
 
           <main>
             <Hero onPathChoose={setChosenPath} chosenPath={chosenPath} />
+            <CaseStudy />
             <PresentationViewer />
             <Divider />
             {renderedSections}

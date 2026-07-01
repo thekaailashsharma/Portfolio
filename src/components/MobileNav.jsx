@@ -12,9 +12,9 @@ const sections = [
 ];
 
 const resumes = [
-  { label: 'For Innovators', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
-  { label: 'For Generalists', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-  { label: 'For Event Organizers', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+  { label: 'PM résumé', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
+  { label: 'Eng deep-dive', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
+  { label: 'Speaker one-pager', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
 ];
 
 export default function MobileNav({ onCommandOpen }) {
@@ -67,9 +67,11 @@ export default function MobileNav({ onCommandOpen }) {
           onClick={() => setExpanded(!expanded)}
           className="relative flex items-center gap-2 px-5 py-3 rounded-full border shadow-lg"
           style={{
-            background: theme === 'dark' ? 'rgba(19,19,21,0.95)' : 'rgba(247,244,235,0.97)',
+            background: theme === 'dark' ? 'rgba(19,19,21,0.6)' : 'rgba(247,244,235,0.65)',
+            backdropFilter: 'blur(14px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(160%)',
             borderColor: 'var(--surface-4)',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4), 0 8px 24px rgba(0,0,0,0.18)',
           }}
         >
           <motion.span
@@ -112,7 +114,9 @@ export default function MobileNav({ onCommandOpen }) {
               <div
                 className="border-t rounded-t-3xl shadow-2xl px-6 pt-4 pb-8"
                 style={{
-                  background: theme === 'dark' ? 'rgba(19,19,21,0.98)' : 'rgba(247,244,235,0.99)',
+                  background: theme === 'dark' ? 'rgba(19,19,21,0.8)' : 'rgba(247,244,235,0.82)',
+                  backdropFilter: 'blur(20px) saturate(160%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(160%)',
                   borderColor: 'var(--surface-4)',
                 }}
               >

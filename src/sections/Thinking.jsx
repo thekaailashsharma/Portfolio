@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import SectionLabel from '../components/SectionLabel';
+import { WhyBeforeHowLoop } from '../components/Illustrations';
 import { MarginNote } from '../components/FootnoteSystem';
 import { marginNotes } from '../data/marginNotes';
 import { useTheme } from '../hooks/useTheme';
@@ -84,11 +85,11 @@ function WritingCard({ post, isExpanded, onToggle }) {
           ? 'dark:shadow-xl dark:shadow-black/20 shadow-md shadow-stone-200/20'
           : ''
       }`}>
-        <div className={`absolute inset-0 transition-all duration-500 ${
+        <div className={`absolute inset-0 backdrop-blur-md border transition-all duration-500 rounded-2xl ${
           isExpanded
-            ? theme === 'dark' ? 'bg-[#141416]' : 'bg-[#f5f2e8]'
-            : theme === 'dark' ? 'bg-surface-1/30' : 'bg-surface-1/50'
-        }`} />
+            ? theme === 'dark' ? 'bg-[#141416]/80 border-accent/20' : 'bg-[#f5f2e8]/80 border-accent/20'
+            : theme === 'dark' ? 'bg-surface-1/30 border-surface-3/40' : 'bg-surface-1/55 border-surface-3/40'
+        }`} style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4)' }} />
 
         {isExpanded && (
           <div className="absolute inset-0 opacity-[0.04]" style={{
@@ -233,6 +234,12 @@ export default function Thinking() {
                 </a>
                 {' '}and working notes from the field.
               </p>
+            </FadeIn>
+
+            <FadeIn delay={0.05}>
+              <div className="mb-8 max-w-md">
+                <WhyBeforeHowLoop />
+              </div>
             </FadeIn>
 
             <div className="space-y-3">

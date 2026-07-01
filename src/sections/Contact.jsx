@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
+import Signature from '../components/Signature';
+import { FirstWeek } from '../components/Illustrations';
 import { useTheme } from '../hooks/useTheme';
 
 const links = [
@@ -44,6 +46,16 @@ const links = [
     ),
   },
   {
+    label: 'YouTube',
+    href: 'https://youtube.com/@thekaailashsharma',
+    description: 'Demos, talks & the 2-min intro',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+    ),
+  },
+  {
     label: 'Email',
     href: 'mailto:kailashps.1011@gmail.com',
     description: 'For serious conversations',
@@ -56,9 +68,9 @@ const links = [
 ];
 
 const resumes = [
-  { label: 'For Innovators', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
-  { label: 'For Generalists', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-  { label: 'For Event Organizers', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+  { label: 'Product Manager', desc: 'Product & GTM roles', id: '12GDzn9b11O6LAaxzgUBon7t6f-KelTLE', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
+  { label: 'Engineering', desc: 'Technical deep-dive', id: '1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
+  { label: 'Speaker', desc: 'For event organizers', id: '169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
 ];
 
 export default function Contact() {
@@ -74,14 +86,18 @@ export default function Contact() {
               // end of file
             </span>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl dark:text-zinc-100 text-stone-900 leading-tight mb-6">
-              Currently exploring.
+              Let&rsquo;s build something real.
             </h2>
             <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 max-w-md mx-auto leading-relaxed mb-3">
-              Looking for roles in consumer products, AI systems, or platform teams
-              where product thinking and engineering depth both matter.
+              Open to Product Manager roles in consumer, AI, or platform teams — the kind where
+              execution and ruthless prioritization decide whether the product survives.
             </p>
-            <p className="font-sans text-[13px] dark:text-zinc-600 text-stone-400/80 max-w-sm mx-auto leading-relaxed italic mb-4">
-              If you&rsquo;re building something where the problem isn&rsquo;t fully defined yet &mdash; let&rsquo;s talk.
+            <p className="font-sans text-[13.5px] dark:text-zinc-400 text-stone-500 max-w-lg mx-auto leading-relaxed mb-4">
+              I think in <span className="text-accent">pipeline outcomes</span> — ICP fit, signal-to-action, pipeline velocity,
+              conversion at every stage. Not just task completion.
+            </p>
+            <p className="font-sans text-[13px] dark:text-zinc-600 text-stone-400/90 max-w-sm mx-auto leading-relaxed italic mb-5">
+              Available immediately. Give me a real problem and a week — happy to do a live build as the evaluation.
             </p>
             <a
               href="https://wa.me/+919326405547"
@@ -91,6 +107,12 @@ export default function Contact() {
             >
               Fastest way to reach me? WhatsApp ↗
             </a>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.08}>
+          <div className="max-w-md mx-auto mb-12">
+            <FirstWeek />
           </div>
         </FadeIn>
 
@@ -127,29 +149,37 @@ export default function Contact() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.2}>
-          <div className="mb-20 p-6 rounded-xl border border-surface-3/40 bg-surface-1/20">
-            <div className="flex items-center gap-2 mb-4">
-              <svg className="w-4 h-4 dark:text-zinc-500 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-              </svg>
+        <FadeIn delay={0.18}>
+          <div className="mb-10">
+            <div className="flex items-center justify-center gap-2 mb-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] dark:text-zinc-500 text-stone-400">
-                Proof of Work
+                Pick your lens · three résumés, one story
               </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {resumes.map((r) => (
                 <a
                   key={r.label}
                   href={r.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between px-4 py-3 rounded-lg border border-surface-3/50 bg-surface-2/30 hover:bg-surface-2/60 hover:border-accent/20 transition-all duration-300"
+                  className="group glass-panel glass-sheen rounded-2xl overflow-hidden hover:border-accent/40 transition-all duration-300 hover:-translate-y-1.5"
                 >
-                  <span className="font-sans text-[13px] dark:text-zinc-300 text-stone-600 group-hover:text-accent transition-colors">
-                    {r.label}
-                  </span>
-                  <span className="text-xs dark:text-zinc-600 text-stone-400 group-hover:text-accent transition-colors">↗</span>
+                  <div className="relative h-44 overflow-hidden bg-surface-2 flex items-center justify-center">
+                    <img
+                      src={`https://drive.google.com/thumbnail?id=${r.id}&sz=w600`}
+                      alt={`${r.label} résumé preview`}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                      onError={(e) => { e.currentTarget.style.opacity = '0.15'; }}
+                    />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 62%, rgba(33,27,22,.45))' }} />
+                    <span className="absolute bottom-2.5 right-3 font-mono text-[9px] text-white/90 px-2 py-0.5 rounded-md" style={{ background: 'rgba(200,80,42,.85)' }}>Open ↗</span>
+                  </div>
+                  <div className="p-4">
+                    <span className="font-sans text-[15px] dark:text-zinc-200 text-stone-700 group-hover:text-accent transition-colors">{r.label}</span>
+                    <p className="font-mono text-[10px] dark:text-zinc-600 text-stone-400 mt-1">{r.desc}</p>
+                  </div>
                 </a>
               ))}
             </div>
@@ -158,15 +188,7 @@ export default function Contact() {
 
         <FadeIn delay={0.3}>
           <div className="flex justify-center mb-8">
-            <img
-              src="/sign.png"
-              alt="Kailash Sharma signature"
-              className="h-16 sm:h-20 w-auto"
-              style={{
-                filter: dark ? 'invert(1) brightness(1.2)' : 'grayscale(1) contrast(1.5) brightness(0.3)',
-                opacity: 0.6,
-              }}
-            />
+            <Signature className="h-16 sm:h-20" dark={dark} />
           </div>
           <div className="border-t border-surface-3/30 pt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">

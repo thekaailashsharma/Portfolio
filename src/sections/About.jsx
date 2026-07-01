@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import SectionLabel from '../components/SectionLabel';
 import Annotation from '../components/Annotation';
+import { NorthStarTree, SkillSurface, OperatingProfile, ProgressRing } from '../components/Illustrations';
 import { Footnote, MarginNote } from '../components/FootnoteSystem';
 import { footnotes, marginNotes } from '../data/marginNotes';
 import { useGitHubStats } from '../hooks/useGitHubStats';
@@ -113,7 +114,7 @@ export default function About() {
               <BentoCell delay={0.25}>
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/40 block mb-3">Philosophy</span>
                 <p className="font-serif text-[16px] dark:text-zinc-300 text-stone-600 italic leading-relaxed">
-                  "You can't deliver the future if you're not in the future."
+                  "I want to know the <span className="text-accent not-italic">why</span> before the how."
                 </p>
               </BentoCell>
 
@@ -184,12 +185,14 @@ export default function About() {
               </BentoCell>
             </div>
 
-            <FadeIn delay={0.25}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-8 border-t border-surface-3/60">
+            <FadeIn delay={0.22}>
+              <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 items-center pt-8 border-t border-surface-3/60">
+                <OperatingProfile />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   { trait: 'Builder Mindset', desc: 'I default to building. Prototypes over presentations, shipping over planning.' },
                   { trait: 'Comfort with Ambiguity', desc: 'I operate well when the spec is thin and the constraints are thick.' },
-                  { trait: 'Product Thinking', desc: 'Every engineering decision is a product decision. I think about users first.' },
+                  { trait: 'Product Thinking', desc: 'Every engineering decision is a product decision. I ask what outcome it moves before I ask how to build it.' },
                   { trait: 'Engineering Depth', desc: 'Android, iOS, backend, AI systems. I go where the problem needs me.' },
                 ].map((item, i) => (
                   <FadeIn key={item.trait} delay={0.08 * i} y={10}>
@@ -206,6 +209,22 @@ export default function About() {
                     </motion.div>
                   </FadeIn>
                 ))}
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+                <NorthStarTree />
+                <SkillSurface />
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.35}>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4 rounded-2xl border border-surface-3/50 bg-surface-1/40 backdrop-blur-md p-5" style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4)' }}>
+                <ProgressRing pct={88} label="<12mo" sub="intern → SDE" color="#C8502A" />
+                <ProgressRing pct={92} label="200K+" sub="daily users" color="#0E7C7B" />
+                <ProgressRing pct={80} label="4×" sub="Global Top 100" color="#C89645" />
               </div>
             </FadeIn>
           </div>

@@ -82,16 +82,12 @@ export default function AIChatbot({ open, onClose }) {
           />
 
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95, rotateX: 8 }}
+            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="relative z-[91] w-[calc(100vw-2rem)] sm:w-[500px] max-h-[80vh] flex flex-col overflow-hidden rounded-2xl border"
-            style={{
-              backgroundColor: 'var(--surface-1)',
-              borderColor: 'var(--surface-4)',
-              boxShadow: '0 25px 80px rgba(0,0,0,0.4)',
-            }}
+            transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+            className="glass-panel relative z-[91] w-[calc(100vw-2rem)] sm:w-[500px] max-h-[80vh] flex flex-col overflow-hidden rounded-2xl"
+            style={{ transformPerspective: 1200 }}
           >
             <div className="px-5 py-4 border-b shrink-0 flex items-center justify-between" style={{ borderColor: 'var(--surface-3)' }}>
               <div>
@@ -184,16 +180,18 @@ export default function AIChatbot({ open, onClose }) {
                     color: 'var(--text-primary)',
                   }}
                 />
-                <button
+                <motion.button
                   onClick={() => sendMessage()}
                   disabled={loading || !input.trim()}
-                  className="w-10 h-10 flex items-center justify-center rounded-xl border disabled:opacity-30 transition-all"
-                  style={{ backgroundColor: 'rgba(200,168,124,0.12)', borderColor: 'rgba(200,168,124,0.25)' }}
+                  whileTap={{ scale: 0.92 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="w-10 h-10 shrink-0 flex items-center justify-center rounded-xl disabled:opacity-40 transition-all"
+                  style={{ backgroundColor: '#C8502A', color: '#fff', boxShadow: '0 8px 20px -8px rgba(200,80,42,.7)' }}
                 >
-                  <svg className="w-4 h-4" style={{ color: 'var(--accent)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                   </svg>
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.div>

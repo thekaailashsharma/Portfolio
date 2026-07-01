@@ -22,7 +22,7 @@ const nodes = [
     branch: 'engineering',
     learning: 'How small system changes influence user behavior at scale',
     details: [
-      'Promoted from intern to SDE I. Owns reliability of real-time communication systems for 10,000+ daily users.',
+      'Promoted from intern to SDE I. Owns reliability of real-time communication systems for 200K+ daily users.',
       'Works on payments, chat, escalation — flows where trust and failure directly affect outcomes.',
       'Every change is a behavioral experiment at this scale.',
     ],
@@ -64,11 +64,11 @@ const nodes = [
     period: 'Jun 2024 — Feb 2025',
     role: 'Product Manager + Developer',
     branch: 'product',
-    learning: 'Product management is translation — between users, engineers, and business reality',
+    learning: 'Hired as an engineer — ended up owning the full outbound infrastructure. Every system I build ends up solving a revenue problem.',
     details: [
-      'Led end-to-end development of the Leadbeam mobile app for US-based teams.',
-      'Implemented 15+ FCM notification flows, Lead Maps, and managed full HubSpot integration.',
-      'Streamlined CRM updates for 200+ users.',
+      'Hired as an engineer; grew into owning the full outbound infrastructure for US-based GTM teams.',
+      'Built 15+ FCM notification flows, Lead Maps, and a full HubSpot CRM integration.',
+      'Streamlined CRM updates for 200+ users — closer to pipeline than to code.',
     ],
     systemNote: 'Remote product work across time zones forces clarity in communication.',
   },
@@ -163,6 +163,20 @@ const nodes = [
   },
 ];
 
+// Clearbit company logos (runtime, onError-hide), metric chips + expanded images per node
+const LOGOS = {
+  'shaadi-sde': 'shaadi.com', 'openpaws': 'openpaws.ai', 'shaadi-intern': 'shaadi.com',
+  'leadbeam': 'leadbeam.ai', 'my-irish-cousin': 'myirishcousin.com', 'fold': 'fold.money',
+  'internshala': 'internshala.com', 'easocare': 'easocare.com',
+};
+const METRICS = {
+  'shaadi-sde': '200K+ DAU', 'openpaws': '370+ contributors', 'shaadi-intern': 'Intern → SDE <12mo',
+  'leadbeam': 'Owned outbound infra', 'my-irish-cousin': 'Intl product', 'fold': '10k+ users',
+  'hackathons': '4× Global Top 100', 'speaking': '10+ talks',
+};
+const NODE_IMG = { 'hackathons': '/evidence/mumbai-hacks.png', 'speaking': '/evidence/devfest-mumbai.png' };
+const TEAL_METRIC = new Set(['openpaws']); // teal reserved for AI/live/data
+
 function GitLine({ fromBranch, index, totalNodes }) {
   const from = branches[fromBranch];
   if (!from) return null;
@@ -210,6 +224,41 @@ export default function Timeline({ openEvidence }) {
               </p>
             </FadeIn>
 
+            <FadeIn delay={0.04}>
+              <div className="mb-10 ml-0 lg:ml-[200px] max-w-2xl">
+                <svg viewBox="0 0 600 150" className="w-full" style={{ overflow: 'visible' }} aria-label="Engineering, Product, AI and Community converging into Product">
+                  {Object.entries(branches).map(([key, b], i) => {
+                    const ys = { engineering: 26, product: 58, ai: 92, community: 124 };
+                    const y0 = ys[key];
+                    return (
+                      <g key={key}>
+                        <text x="0" y={y0 + 4} fill="var(--text-muted)" className="font-mono" style={{ fontSize: 11 }}>{b.label}</text>
+                        <motion.path
+                          d={`M96,${y0} C300,${y0} 360,75 506,${74 + (i - 1.5) * 4}`}
+                          fill="none" stroke={b.color} strokeWidth="2.5" strokeOpacity="0.7" strokeLinecap="round"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          whileInView={{ pathLength: 1, opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1.1, delay: 0.15 + i * 0.18, ease: 'easeInOut' }}
+                        />
+                      </g>
+                    );
+                  })}
+                  <motion.circle cx="510" cy="75" r="9" fill="var(--accent)"
+                    initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1, duration: 0.4 }} />
+                  <motion.circle cx="510" cy="75" r="17" fill="none" stroke="var(--accent)" strokeOpacity="0.35"
+                    initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.05, duration: 0.4 }} />
+                  <motion.text x="534" y="72" fill="var(--text-primary)" className="font-serif" style={{ fontSize: 22 }}
+                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.2 }}>Product</motion.text>
+                  <motion.text x="534" y="90" fill="var(--accent)" className="font-mono" style={{ fontSize: 10 }}
+                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.3 }}>= me, today</motion.text>
+                </svg>
+                <p className="font-mono text-[11px] dark:text-zinc-600 text-stone-400 mt-3 italic">
+                  Four disciplines, one product mind. The path wasn&apos;t linear — it converged.
+                </p>
+              </div>
+            </FadeIn>
+
             <FadeIn delay={0.05}>
               <div className="flex flex-wrap gap-4 mb-12 ml-0 lg:ml-[200px]">
                 {Object.entries(branches).map(([key, b]) => (
@@ -232,23 +281,43 @@ export default function Timeline({ openEvidence }) {
 
                       <motion.div
                         onClick={() => setExpanded(isExpanded ? null : node.id)}
-                        className={`lg:ml-[200px] cursor-pointer rounded-xl border transition-all duration-500 ${
+                        whileTap={{ scale: 0.99 }}
+                        className={`lg:ml-[200px] cursor-pointer rounded-xl border backdrop-blur-md transition-all duration-500 ${
                           isExpanded
-                            ? 'bg-surface-2/80 border-surface-4/80 dark:shadow-xl dark:shadow-black/20 shadow-md shadow-stone-200/30'
-                            : 'bg-surface-1/20 border-surface-3/40 hover:bg-surface-1/50 hover:border-surface-4/60'
+                            ? 'bg-surface-2/60 border-accent/25 dark:shadow-xl dark:shadow-black/20 shadow-md shadow-stone-200/30'
+                            : 'bg-surface-1/30 border-surface-3/50 hover:bg-surface-1/55 hover:border-accent/25'
                         }`}
+                        style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4)' }}
                         layout
                       >
                         <div className="p-5 sm:p-6">
                           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                             <div className="flex items-center gap-3 flex-wrap">
                               <span className="w-2.5 h-2.5 rounded-full shrink-0 lg:hidden" style={{ backgroundColor: branch?.color, opacity: 0.6 }} />
+                              {LOGOS[node.id] && (
+                                <img
+                                  src={`https://logo.clearbit.com/${LOGOS[node.id]}`}
+                                  alt=""
+                                  loading="lazy"
+                                  className="w-6 h-6 rounded-md object-contain bg-white/70 p-0.5 border border-surface-3/50 shrink-0"
+                                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                />
+                              )}
                               <h3 className={`font-serif text-lg sm:text-xl lg:text-2xl transition-colors duration-300 ${isExpanded ? 'dark:text-zinc-100 text-stone-900' : 'dark:text-zinc-300 text-stone-700'}`}>
                                 {node.label}
                               </h3>
                               <span className="font-mono text-[9px] lg:text-[11px] px-2 py-0.5 rounded-full border uppercase tracking-wider" style={{ borderColor: `${branch?.color}33`, color: branch?.color, backgroundColor: `${branch?.color}15` }}>
                                 {branch?.label}
                               </span>
+                              {METRICS[node.id] && (
+                                <span className="font-mono text-[9px] lg:text-[10px] px-2 py-0.5 rounded-full border" style={{
+                                  borderColor: TEAL_METRIC.has(node.id) ? 'rgba(14,124,123,.35)' : 'rgba(200,80,42,.3)',
+                                  color: TEAL_METRIC.has(node.id) ? '#0E7C7B' : '#C8502A',
+                                  backgroundColor: TEAL_METRIC.has(node.id) ? 'rgba(14,124,123,.08)' : 'rgba(200,80,42,.07)',
+                                }}>
+                                  {METRICS[node.id]}
+                                </span>
+                              )}
                             </div>
                             <div className="flex items-center gap-3 shrink-0">
                               <span className="font-mono text-[11px] lg:text-[13px] dark:text-zinc-600 text-stone-400 whitespace-nowrap">
@@ -285,6 +354,15 @@ export default function Timeline({ openEvidence }) {
                                 className="overflow-hidden"
                               >
                                 <div className="pt-5 mt-5 border-t border-surface-4/40">
+                                  {NODE_IMG[node.id] && (
+                                    <motion.div
+                                      initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                                      className="mb-5 rounded-lg overflow-hidden border border-surface-3/50"
+                                      style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4)' }}
+                                    >
+                                      <img src={NODE_IMG[node.id]} alt={node.label} loading="lazy" className="w-full h-44 object-cover media-duotone" style={{ objectPosition: 'center 30%' }} />
+                                    </motion.div>
+                                  )}
                                   <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6">
                                     <div className="space-y-3">
                                       {node.details.map((detail, j) => (

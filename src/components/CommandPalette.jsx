@@ -114,13 +114,14 @@ export default function CommandPalette({ open, onClose }) {
             onClick={() => onClose(false)}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.96, y: -10, rotateX: 6 }}
+            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
-            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ type: 'spring', stiffness: 300, damping: 24 }}
             className="fixed top-[20%] left-1/2 -translate-x-1/2 z-[101] w-[90vw] max-w-[520px]"
+            style={{ transformPerspective: 1000 }}
           >
-            <div className="bg-surface-1 border border-surface-4/80 rounded-2xl shadow-2xl dark:shadow-black/60 shadow-stone-400/20 overflow-hidden">
+            <div className="glass-panel rounded-2xl overflow-hidden">
               <div className="flex items-center gap-3 px-5 py-4 border-b border-surface-3/60">
                 <svg className="w-4 h-4 dark:text-zinc-500 text-stone-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

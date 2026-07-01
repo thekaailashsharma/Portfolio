@@ -51,6 +51,31 @@ const slides = [
     ),
   },
   {
+    id: 'ai-revenue',
+    render: () => (
+      <div className="flex flex-col justify-center h-full px-10 lg:px-14">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] mb-4" style={{ color: '#0E7C7B' }}>AI for Revenue</span>
+        <h3 className="font-serif text-3xl lg:text-4xl dark:text-zinc-100 text-stone-900 mb-6 leading-tight">
+          AI that moves the pipeline,<br />not the demo reel.
+        </h3>
+        <div className="space-y-4">
+          <div className="flex gap-4 items-start">
+            <span className="font-mono text-[11px] mt-1 shrink-0 w-16" style={{ color: '#0E7C7B' }}>GTM</span>
+            <p className="font-sans text-[14px] dark:text-zinc-400 text-stone-500 leading-relaxed">Autonomous n8n research & enrichment pipelines in production — 2-hour SDR research in minutes. Same logic as Clay, Apollo, Instantly.</p>
+          </div>
+          <div className="flex gap-4 items-start">
+            <span className="font-mono text-[11px] mt-1 shrink-0 w-16" style={{ color: '#0E7C7B' }}>REVENUE</span>
+            <p className="font-sans text-[14px] dark:text-zinc-400 text-stone-500 leading-relaxed">Owned the full outbound infrastructure at Leadbeam. Every system I build ends up solving a revenue problem.</p>
+          </div>
+          <div className="flex gap-4 items-start">
+            <span className="font-mono text-[11px] mt-1 shrink-0 w-16" style={{ color: '#0E7C7B' }}>SPEED</span>
+            <p className="font-sans text-[14px] dark:text-zinc-400 text-stone-500 leading-relaxed">Drove ₹1&nbsp;crore org-wide AI adoption at Shaadi — velocity +15%. Called "Pioneer of AI."</p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
     id: 'engineering',
     render: () => (
       <div className="flex flex-col justify-center h-full px-10 lg:px-14">
@@ -165,9 +190,11 @@ export default function PresentationViewer() {
 
   useEffect(() => {
     if (paused) return;
-    const timer = setInterval(() => paginate(1), 6000);
+    const timer = setInterval(() => {
+      if (!document.hidden) setCurrent(([p]) => [(p + 1) % slides.length, 1]);
+    }, 6000);
     return () => clearInterval(timer);
-  }, [paused, paginate, current]);
+  }, [paused]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -179,19 +206,14 @@ export default function PresentationViewer() {
   }, [paginate]);
 
   return (
-    <div className="hidden md:block max-w-5xl mx-auto px-6 sm:px-10 lg:px-20 py-8">
+    <div className="block max-w-5xl mx-auto px-6 sm:px-10 lg:px-20 py-8">
       <div
-        className="relative rounded-2xl overflow-hidden border border-surface-3/60 shadow-lg"
-        style={{
-          aspectRatio: '16/9',
-          background: dark
-            ? 'linear-gradient(135deg, #0f0f12 0%, #141418 100%)'
-            : 'linear-gradient(135deg, #f5f2e8 0%, #f0ece0 100%)',
-        }}
+        className="glass-panel relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-video"
+        style={{ minHeight: 440 }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <AnimatePresence custom={direction} mode="wait">
+        <AnimatePresence custom={direction} initial={false}>
           <motion.div
             key={current}
             custom={direction}
@@ -199,8 +221,9 @@ export default function PresentationViewer() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
             className="absolute inset-0"
+            style={{ height: '100%' }}
           >
             {slides[current].render(dark)}
           </motion.div>

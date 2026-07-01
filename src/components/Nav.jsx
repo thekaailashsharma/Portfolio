@@ -10,6 +10,8 @@ const navItems = [
   { label: 'Connect', href: '#contact' },
 ];
 
+const PM_RESUME = 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing';
+
 function ThemeToggle() {
   const { theme, toggle } = useTheme();
   const { play } = useSound();
@@ -71,7 +73,7 @@ export default function Nav({ onCommandOpen, onAIToggle, onBookToggle, bookMode 
       transition={{ delay: 0.2, duration: 0.4 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         scrolled
-          ? 'bg-surface-0/80 backdrop-blur-xl border-b border-surface-3/50'
+          ? 'glass-panel !rounded-none !border-x-0 !border-t-0'
           : 'bg-transparent'
       }`}
     >
@@ -102,7 +104,7 @@ export default function Nav({ onCommandOpen, onAIToggle, onBookToggle, bookMode 
             </a>
           ))}
           <button
-            onClick={() => { onAIToggle?.(); play('open'); }}
+            data-ai onClick={() => { onAIToggle?.(); play('open'); }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/25 bg-accent/5 hover:bg-accent/10 hover:border-accent/40 transition-all duration-300 group"
           >
             <span className="text-accent text-xs font-bold">✦</span>
@@ -117,12 +119,33 @@ export default function Nav({ onCommandOpen, onAIToggle, onBookToggle, bookMode 
             </svg>
             <kbd className="font-mono text-[9px] dark:text-zinc-600 text-stone-400">⌘K</kbd>
           </button>
+          <a
+            href={PM_RESUME}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => play('click')}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-mono text-[10px] uppercase tracking-[0.12em] font-semibold transition-all duration-300 hover:-translate-y-px"
+            style={{ background: '#C8502A', color: '#F2ECDD', boxShadow: '0 8px 22px -10px rgba(200,80,42,.6)' }}
+          >
+            Résumé
+          </a>
           <SoundToggle />
           <ThemeToggle />
         </div>
 
         {/* Mobile header controls */}
         <div className="flex md:hidden items-center gap-1.5">
+          <a
+            href={PM_RESUME}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => play('click')}
+            className="flex items-center justify-center px-3 h-8 rounded-lg font-mono text-[10px] uppercase tracking-[0.1em] font-semibold"
+            style={{ background: '#C8502A', color: '#F2ECDD' }}
+            aria-label="Résumé"
+          >
+            Résumé
+          </a>
           {onBookToggle && (
             <button
               onClick={() => { onBookToggle(!bookMode); play('click'); }}
@@ -137,7 +160,7 @@ export default function Nav({ onCommandOpen, onAIToggle, onBookToggle, bookMode 
             </button>
           )}
           <button
-            onClick={() => { onAIToggle?.(); play('open'); }}
+            data-ai onClick={() => { onAIToggle?.(); play('open'); }}
             className="w-8 h-8 flex items-center justify-center rounded-lg border border-accent/25 bg-accent/5 hover:bg-accent/10 transition-all duration-300"
             aria-label="Ask AI"
           >

@@ -12,7 +12,7 @@ export const marginNotes = {
     },
     {
       id: 'mn-repos',
-      text: '62 repos and counting. Most of them are terrible. That\'s the point.',
+      text: '62 repos and counting. Most were experiments that failed fast — that\'s the compounding.',
     },
     {
       id: 'mn-gpa',

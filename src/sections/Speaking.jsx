@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import SectionLabel from '../components/SectionLabel';
 import Annotation from '../components/Annotation';
@@ -51,6 +52,51 @@ export default function Speaking({ openEvidence }) {
               <p className="font-sans text-[15px] lg:text-base dark:text-zinc-500 text-stone-400 mb-12 max-w-lg leading-relaxed">
                 Builder-first mentoring. Practical, execution-focused, and grounded in real constraints. No motivational fluff.
               </p>
+            </FadeIn>
+
+            <FadeIn delay={0.06}>
+              <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-3 mb-3">
+                {/* featured — Droid Tribe (his best stage photo) */}
+                <div className="relative rounded-2xl overflow-hidden border border-surface-3/50 aspect-[16/10]" style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4)' }}>
+                  <img src="/evidence/droid-tribe.png" alt="Speaking at Droid Tribe" loading="lazy" className="w-full h-full object-cover media-duotone transition-transform duration-700 hover:scale-[1.04]" style={{ objectPosition: 'center 22%' }} />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 45%, rgba(33,27,22,.7))' }} />
+                  <span className="absolute bottom-3 left-3.5 font-mono text-[11px] text-white/95 tracking-wide">Droid Tribe · community</span>
+                </div>
+                {/* ReachGraph — talks over time (teal = data channel) */}
+                <div className="rounded-2xl border border-surface-3/50 bg-surface-1/30 backdrop-blur-md p-5 flex flex-col" style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4)' }}>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent/50 mb-1">On stage, over time</span>
+                  <span className="font-serif text-2xl dark:text-zinc-100 text-stone-900 mb-2">10+ talks</span>
+                  <svg viewBox="0 0 200 90" className="w-full flex-1" preserveAspectRatio="none">
+                    <line x1="0" y1="80" x2="200" y2="80" stroke="rgba(33,27,22,.12)" strokeWidth="1" />
+                    <motion.path d="M4,74 C40,70 60,56 90,44 C120,32 150,26 196,10" fill="none" stroke="#0E7C7B" strokeWidth="2.5" strokeLinecap="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.4, ease: 'easeOut' }} />
+                    <motion.circle cx="196" cy="10" r="4" fill="#0E7C7B" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 1.2 }} />
+                  </svg>
+                  <div className="flex justify-between font-mono text-[8px] text-stone-400 mt-1"><span>2023</span><span style={{ color: '#0E7C7B' }}>now</span></div>
+                </div>
+              </div>
+              {/* curated stage gallery — DevFest Bhopal highlighted, four equal tiles */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-10">
+                {[
+                  { src: '/stage/IMG_2585.WEBP', pos: 'center 26%', label: 'DevFest Bhopal', highlight: true },
+                  { src: '/stage/IMG_2577.WEBP', pos: 'center 42%', label: '' },
+                  { src: '/evidence/devfest-mumbai.png', pos: 'center 20%', label: 'DevFest Mumbai' },
+                  { src: '/evidence/gdg-mad.png', pos: 'center 22%', label: 'GDG MAD' },
+                ].map((p, i) => (
+                  <motion.div
+                    key={p.src}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
+                    className={`relative rounded-xl overflow-hidden aspect-[4/3] ${p.highlight ? 'border-2' : 'border border-surface-3/50'}`}
+                    style={p.highlight ? { borderColor: 'rgba(200,80,42,.5)', boxShadow: '0 10px 28px -12px rgba(200,80,42,.35)' } : {}}
+                  >
+                    <img src={p.src} alt={`Kailash Sharma speaking${p.label ? ' at ' + p.label : ''}`} loading="lazy" className="w-full h-full object-cover media-duotone transition-transform duration-700 hover:scale-105" style={{ objectPosition: p.pos }} />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 52%, rgba(33,27,22,.62))' }} />
+                    {p.label && <span className="absolute bottom-2 left-2.5 font-mono text-[9px] text-white/90 tracking-wide">{p.label}</span>}
+                  </motion.div>
+                ))}
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.1}>

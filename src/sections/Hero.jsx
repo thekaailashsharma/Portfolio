@@ -248,7 +248,7 @@ export default function Hero({ onPathChoose, chosenPath }) {
       {/* scroll cue */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
-        className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[3]" style={{ bottom: 24 }}
+        className="absolute left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 z-[3]" style={{ bottom: 24 }}
       >
         <span className="font-mono" style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: C.muted }}>The journey</span>
         <motion.div animate={{ scaleY: [0.5, 1, 0.5], opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}

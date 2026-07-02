@@ -3,6 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import HTMLFlipBook from 'react-pageflip';
 import { useTheme } from '../hooks/useTheme';
 import { useSound } from './SoundManager';
+import Signature from './Signature';
+import { NorthStarTree, OperatingProfile, WhyBeforeHowLoop, RetentionCurve, Sparkline, TrendChip, SkillSurface, PipelineFunnel, ProgressRing } from './Illustrations';
+
+// new-design palette (matches the site: warm beige / espresso, terracotta + teal)
+const T = '#C8502A';
+const TEAL = '#0E7C7B';
 
 const bookPages = [
   { id: 'cover', type: 'cover' },
@@ -11,9 +17,11 @@ const bookPages = [
   { id: 'ch1', type: 'chapter', num: 'I', title: 'The Builder', tagline: 'Identity, philosophy, and the numbers behind it' },
   { id: 'about', type: 'about' },
   { id: 'stats', type: 'stats' },
+  { id: 'signals', type: 'signals' },
   { id: 'photo-candid2', type: 'photo', src: '/candid/candid2.jpeg', caption: 'Building at 2 AM — hackathon mode' },
   { id: 'ch2', type: 'chapter', num: 'II', title: 'The Work', tagline: 'Zero-to-one systems that shipped' },
   { id: 'casestudy', type: 'casestudy' },
+  { id: 'pipeline', type: 'pipeline' },
   { id: 'proj-tripify', type: 'project', name: 'Tripify', tagline: 'AI-Powered Travel Manager', impact: '600+ downloads · Native Android & iOS', learning: 'The hardest UX problem is making complex data feel simple.', stack: ['Kotlin', 'Swift', 'Maps', 'AI'], img: '/candid/tripify.png' },
   { id: 'proj-w2w', type: 'project', name: 'Waste2Wealth', tagline: 'Making Cities Sustainable', impact: '1st at National Hackathon (500+) · Global Top 100', learning: 'Behavior change needs incentive design, not just awareness.', stack: ['Android', 'Firebase', 'GCP'] },
   { id: 'photo-mumbai', type: 'photo', src: '/evidence/mumbai-hacks.png', caption: '1st Place — National AI Hackathon, 500+ participants' },
@@ -55,11 +63,20 @@ const Page = forwardRef(function Page({ children }, ref) {
 function PaperBg({ dark }) {
   return (
     <div className="absolute inset-0" style={{
-      background: dark ? '#131315' : '#f5f2e8',
-      backgroundImage: `repeating-linear-gradient(transparent, transparent 31px, ${dark ? 'rgba(200,168,124,0.04)' : 'rgba(139,111,71,0.06)'} 32px)`,
+      background: dark ? '#1A1510' : '#F2ECDD',
+      backgroundImage: `repeating-linear-gradient(transparent, transparent 31px, ${dark ? 'rgba(224,104,58,0.05)' : 'rgba(200,80,42,0.06)'} 32px)`,
       backgroundPosition: '0 48px',
     }} />
   );
+}
+
+// tinted glass-style card for the book (backdrop-filter won't refract inside the flipbook, so we tint)
+function glassCard(dark) {
+  return {
+    background: dark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.5)',
+    border: `1px solid ${dark ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.6)'}`,
+    boxShadow: `inset 0 1px 0 ${dark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.7)'}`,
+  };
 }
 
 function V() {
@@ -80,7 +97,7 @@ function Sig({ dark, className = 'h-16' }) {
 function CoverPage({ dark, onAIToggle }) {
   return (
     <div className="relative h-full flex flex-col items-center justify-center text-center px-10"
-      style={{ background: dark ? 'linear-gradient(160deg,#1a1815,#0f0e0c)' : 'linear-gradient(160deg,#ebe6d8,#f5f2e8)' }}>
+      style={{ background: dark ? 'linear-gradient(160deg,#221B15,#141009)' : 'linear-gradient(160deg,#EBE3CF,#F2ECDD)' }}>
       <div className="absolute top-6 left-6 right-6 bottom-6 border rounded-lg" style={{ borderColor: 'var(--accent)', opacity: 0.12 }} />
       <div className="relative flex flex-col items-center">
         <div className="w-24 h-24 rounded-full overflow-hidden border-2 mb-6" style={{ borderColor: 'var(--accent)', opacity: 0.8 }}>
@@ -95,7 +112,7 @@ function CoverPage({ dark, onAIToggle }) {
           </p>
         </div>
         <Sig dark={dark} className="h-14 mb-5" />
-        <span className="font-mono text-[10px] tracking-wider" style={{ color: 'var(--text-muted)' }}>Mumbai, India &middot; 2025</span>
+        <span className="font-mono text-[10px] tracking-wider" style={{ color: 'var(--text-muted)' }}>Product · AI · Revenue &middot; Mumbai, India · 2026</span>
       </div>
       {onAIToggle && (
         <button onClick={(e) => { e.stopPropagation(); onAIToggle(); }}
@@ -169,7 +186,7 @@ function TocPage({ dark, total }) {
 function ChapterPage({ num, title, tagline, dark }) {
   return (
     <div className="relative h-full flex flex-col items-center justify-center text-center px-10"
-      style={{ background: dark ? 'linear-gradient(145deg,#1a1714,#131315)' : 'linear-gradient(145deg,#ede8da,#f5f2e8)' }}>
+      style={{ background: dark ? 'linear-gradient(145deg,#221B15,#1A1510)' : 'linear-gradient(145deg,#EBE3CF,#F2ECDD)' }}>
       <span className="font-serif text-[80px] leading-none mb-4" style={{ color: 'var(--accent)', opacity: 0.12 }}>{num}</span>
       <h2 className="font-serif text-[32px] mb-3" style={{ color: 'var(--text-primary)' }}>{title}</h2>
       <div className="w-10 h-px mb-4" style={{ background: 'var(--accent)', opacity: 0.3 }} />
@@ -201,14 +218,7 @@ function AboutPage({ dark, total, pageNum }) {
         <p className="font-sans text-[15px] leading-[1.7] mb-5" style={{ color: 'var(--text-secondary)' }}>
           I&rsquo;m drawn to institution-building problems &mdash; where trust, clarity, and outcomes matter more than optics.
         </p>
-        <div className="grid grid-cols-2 gap-2.5">
-          {['Builder Mindset', 'Product Thinking', 'Comfort with Ambiguity', 'Engineering Depth'].map((t) => (
-            <div key={t} className="flex items-center gap-2 p-3 rounded-xl border" style={{ borderColor: 'var(--surface-3)', background: dark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--accent)', opacity: 0.5 }} />
-              <span className="font-mono text-[10px]" style={{ color: 'var(--text-muted)' }}>{t}</span>
-            </div>
-          ))}
-        </div>
+        <OperatingProfile />
       </div>
       <Pg num={pageNum} total={total} />
       <V />
@@ -246,25 +256,68 @@ function StatsPage({ dark, total, pageNum }) {
   );
 }
 
-function CaseStudyPage({ dark, total, pageNum }) {
+function CaseStudyPage({ total, pageNum }) {
+  // deliberately DARK regardless of theme — the dramatic interlude, matches the site's case study
+  const ink = '#F2ECDD', muted = 'rgba(242,236,221,.65)', line = 'rgba(242,236,221,.12)';
   return (
-    <div className="relative h-full px-8 flex flex-col justify-center" style={{ background: dark ? '#131315' : '#f5f2e8' }}>
+    <div className="relative h-full px-8 flex flex-col justify-center overflow-hidden" style={{ background: '#211B16', color: ink }}>
+      <div className="absolute pointer-events-none" style={{ width: '70%', height: '50%', right: '-15%', top: '-10%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(224,104,58,.16), transparent 60%)', filter: 'blur(50px)' }} />
+      <div className="relative">
+        <span className="font-mono text-[9px] uppercase tracking-[0.3em] block mb-2" style={{ color: T }}>Case Study · proudest work</span>
+        <h2 className="font-serif text-[26px] leading-tight mb-4" style={{ color: ink }}>I made a 200K-user org <span style={{ color: T, fontStyle: 'italic' }}>AI-native.</span></h2>
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          {[['+15%', 'velocity', T], ['−80%', 'A/B cleanup', TEAL], ['₹1cr', 'AI plan', T]].map((m) => (
+            <div key={m[1]} className="rounded-lg p-2.5 text-center" style={{ background: 'rgba(242,236,221,.05)', border: `1px solid ${line}` }}>
+              <div className="font-serif text-[22px] leading-none" style={{ color: m[2] }}>{m[0]}</div>
+              <div className="font-mono text-[8px] uppercase tracking-wide mt-1" style={{ color: muted }}>{m[1]}</div>
+            </div>
+          ))}
+        </div>
+        <div className="rounded-lg p-3 mb-4" style={{ background: 'rgba(242,236,221,.04)', border: `1px solid ${line}` }}>
+          <RetentionCurve dark />
+        </div>
+        <div className="rounded-lg p-3 font-mono" style={{ background: '#0E0B09', border: `1.5px solid ${T}` }}>
+          <div style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: T, marginBottom: 8 }}>// decision log</div>
+          {[['DECISION', 'Ship a workflow, not a mandate.'], ['OUTCOME', 'Org-wide adoption. "Pioneer of AI."']].map(([k, v]) => (
+            <div key={k} className="mb-1.5 last:mb-0"><span style={{ fontSize: 9.5, color: TEAL }}>{k}: </span><span style={{ fontSize: 12, color: ink }}>{v}</span></div>
+          ))}
+        </div>
+      </div>
+      <span className="absolute bottom-5 right-6 font-mono text-[10px]" style={{ color: muted, opacity: 0.5 }}>{pageNum} / {total}</span>
+    </div>
+  );
+}
+
+function SignalsPage({ dark, total, pageNum }) {
+  return (
+    <div className="relative h-full px-7 flex flex-col justify-center" style={{ background: dark ? '#1A1510' : '#F2ECDD' }}>
       <PaperBg dark={dark} />
       <div className="relative">
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em] block mb-2" style={{ color: 'var(--accent)', opacity: 0.4 }}>Case Study</span>
-        <h2 className="font-serif text-[24px] mb-1" style={{ color: 'var(--text-primary)' }}>Real-Time Communication</h2>
-        <p className="font-mono text-[10px] uppercase tracking-wider mb-6" style={{ color: 'var(--accent)', opacity: 0.5 }}>India&rsquo;s Largest Matrimony Platform &middot; 200K DAU</p>
-        {[
-          { label: 'Problem', text: 'Chat reliability was inconsistent during peak hours. Users were dropping mid-conversation in a trust-critical product.' },
-          { label: 'Approach', text: 'Rebuilt the real-time messaging layer. Focused on connection resilience and delivery guarantees.' },
-          { label: 'Outcome', text: '99.2% uptime. Promoted intern → SDE I in under 12 months — fastest track in the org.' },
-          { label: 'Learning', text: 'In trust products, reliability isn\'t a feature — it IS the product.' },
-        ].map((item) => (
-          <div key={item.label} className="mb-4">
-            <span className="font-mono text-[9px] uppercase tracking-wider block mb-1" style={{ color: 'var(--accent)', opacity: 0.5 }}>{item.label}</span>
-            <p className="font-sans text-[14px] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>{item.text}</p>
-          </div>
-        ))}
+        <span className="font-mono text-[9px] uppercase tracking-[0.3em] block mb-4" style={{ color: T }}>The through-line</span>
+        <div className="space-y-3">
+          <NorthStarTree />
+          <SkillSurface />
+        </div>
+      </div>
+      <Pg num={pageNum} total={total} />
+      <V />
+    </div>
+  );
+}
+
+function PipelinePage({ dark, total, pageNum }) {
+  return (
+    <div className="relative h-full px-7 flex flex-col justify-center" style={{ background: dark ? '#1A1510' : '#F2ECDD' }}>
+      <PaperBg dark={dark} />
+      <div className="relative">
+        <span className="font-mono text-[9px] uppercase tracking-[0.3em] block mb-2" style={{ color: TEAL }}>AI for revenue</span>
+        <h2 className="font-serif text-[24px] leading-tight mb-2" style={{ color: 'var(--text-primary)' }}>AI that moves the pipeline, not the demo reel.</h2>
+        <p className="font-sans text-[13px] leading-[1.6] mb-5" style={{ color: 'var(--text-secondary)' }}>
+          Autonomous n8n research &amp; enrichment pipelines in production. Every system I build ends up solving a revenue problem.
+        </p>
+        <div className="rounded-xl p-4" style={glassCard(dark)}>
+          <PipelineFunnel dark={dark} />
+        </div>
       </div>
       <Pg num={pageNum} total={total} />
       <V />
@@ -296,9 +349,9 @@ function ProjectPage({ name, tagline, impact, learning, stack, img, dark, total,
         )}
         <h2 className="font-serif text-[26px] mb-1" style={{ color: 'var(--text-primary)' }}>{name}</h2>
         <p className="font-mono text-[10px] uppercase tracking-wider mb-4" style={{ color: 'var(--accent)', opacity: 0.5 }}>{tagline}</p>
-        <div className="mb-4 px-4 py-3 rounded-xl" style={{ background: dark ? 'rgba(16,185,129,0.08)' : 'rgba(16,185,129,0.06)' }}>
-          <span className="font-mono text-[8px] uppercase tracking-wider block mb-1" style={{ color: dark ? 'rgba(110,231,183,0.6)' : 'rgba(5,150,105,0.6)' }}>Impact</span>
-          <p className="font-sans text-[13px]" style={{ color: dark ? 'rgba(110,231,183,0.8)' : 'rgba(5,150,105,0.8)' }}>{impact}</p>
+        <div className="mb-4 px-4 py-3 rounded-xl" style={{ background: 'rgba(14,124,123,0.08)' }}>
+          <span className="font-mono text-[8px] uppercase tracking-wider block mb-1" style={{ color: TEAL }}>Impact</span>
+          <p className="font-sans text-[13px]" style={{ color: TEAL }}>{impact}</p>
         </div>
         <div className="p-3 rounded-xl border-l-2 mb-4" style={{ borderColor: 'var(--accent)', background: dark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
           <p className="font-sans text-[13px] italic leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{learning}</p>
@@ -416,13 +469,13 @@ function HowIThinkPage({ dark, total, pageNum }) {
       <PaperBg dark={dark} />
       <div className="relative">
         <span className="font-mono text-[9px] uppercase tracking-[0.3em] block mb-3" style={{ color: 'var(--accent)', opacity: 0.4 }}>Framework</span>
-        <h2 className="font-serif text-[24px] mb-6" style={{ color: 'var(--text-primary)' }}>How I approach problems</h2>
+        <h2 className="font-serif text-[24px] mb-5" style={{ color: 'var(--text-primary)' }}>How I approach problems</h2>
         {[
           { step: '01', title: 'Understand the constraint', desc: 'Not "What\'s the feature?" but "What\'s the real problem?"' },
           { step: '02', title: 'Build the smallest testable thing', desc: 'Prototypes over presentations. Ship something real to a real user.' },
-          { step: '03', title: 'Measure what matters', desc: 'Not vanity metrics. Did the user\'s behavior change? Did trust increase?' },
+          { step: '03', title: 'Measure what matters', desc: 'Not vanity metrics. Did behavior change? Did trust increase?' },
         ].map((item) => (
-          <div key={item.step} className="mb-5">
+          <div key={item.step} className="mb-4">
             <div className="flex items-baseline gap-2 mb-1">
               <span className="font-mono text-[12px]" style={{ color: 'var(--accent)', opacity: 0.4 }}>{item.step}</span>
               <h3 className="font-sans text-[16px] font-medium" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
@@ -430,6 +483,7 @@ function HowIThinkPage({ dark, total, pageNum }) {
             <p className="font-sans text-[13px] leading-[1.6] pl-7" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
           </div>
         ))}
+        <div className="mt-2"><WhyBeforeHowLoop /></div>
       </div>
       <Pg num={pageNum} total={total} />
       <V />
@@ -445,17 +499,20 @@ function ConnectPage({ dark, total, pageNum }) {
     { label: 'Email', url: 'mailto:kailashps.1011@gmail.com' },
   ];
   const resumes = [
-    { label: 'For Innovators', url: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
-    { label: 'For Generalists', url: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-    { label: 'For Event Organizers', url: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+    { label: 'PM résumé', url: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
+    { label: 'Engineering', url: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
+    { label: 'Speaker', url: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
   ];
   return (
     <div className="relative h-full px-8 flex flex-col items-center justify-center text-center" style={{ background: dark ? '#131315' : '#f5f2e8' }}>
       <PaperBg dark={dark} />
       <div className="relative w-full">
-        <h2 className="font-serif text-[26px] mb-3" style={{ color: 'var(--text-primary)' }}>Currently exploring.</h2>
-        <p className="font-sans text-[13px] mb-6 max-w-[85%] mx-auto" style={{ color: 'var(--text-muted)' }}>
-          Consumer products, AI systems, or platform teams where both product thinking and engineering depth matter.
+        <h2 className="font-serif text-[26px] mb-3" style={{ color: 'var(--text-primary)' }}>Let&rsquo;s build something real.</h2>
+        <p className="font-sans text-[13px] mb-3 max-w-[88%] mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          I think in <span style={{ color: T }}>pipeline outcomes</span> — ICP fit, signal-to-action, conversion. Not just task completion.
+        </p>
+        <p className="font-sans text-[12px] italic mb-6 max-w-[85%] mx-auto" style={{ color: 'var(--text-muted)' }}>
+          Available immediately. Give me a real problem and a week — I&rsquo;ll do a live build.
         </p>
         <div className="space-y-2 mb-5">
           {links.map((l) => (
@@ -493,7 +550,7 @@ function ConnectPage({ dark, total, pageNum }) {
 function ThankYouPage({ dark }) {
   return (
     <div className="relative h-full flex flex-col items-center justify-center text-center px-10"
-      style={{ background: dark ? 'linear-gradient(160deg,#1a1815,#0f0e0c)' : 'linear-gradient(160deg,#ebe6d8,#f5f2e8)' }}>
+      style={{ background: dark ? 'linear-gradient(160deg,#221B15,#141009)' : 'linear-gradient(160deg,#EBE3CF,#F2ECDD)' }}>
       <div className="absolute top-6 left-6 right-6 bottom-6 border rounded-lg" style={{ borderColor: 'var(--accent)', opacity: 0.08 }} />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
         <span className="font-mono text-[9px] uppercase tracking-[0.5em] block mb-8" style={{ color: 'var(--accent)', opacity: 0.3 }}>End</span>
@@ -537,6 +594,8 @@ function renderPage(page, idx, dark, total, onAIToggle) {
     case 'about': return <AboutPage dark={dark} total={total} pageNum={pg} />;
     case 'stats': return <StatsPage dark={dark} total={total} pageNum={pg} />;
     case 'casestudy': return <CaseStudyPage dark={dark} total={total} pageNum={pg} />;
+    case 'signals': return <SignalsPage dark={dark} total={total} pageNum={pg} />;
+    case 'pipeline': return <PipelinePage dark={dark} total={total} pageNum={pg} />;
     case 'photo': return <PhotoPage src={page.src} caption={page.caption} dark={dark} />;
     case 'project': return <ProjectPage {...page} dark={dark} total={total} pageNum={pg} />;
     case 'timeline': return <TimelinePage label={page.label} items={page.items} dark={dark} total={total} pageNum={pg} />;

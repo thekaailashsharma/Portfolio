@@ -14,7 +14,7 @@ const sections = [
 const resumes = [
   { label: 'PM résumé', href: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
   { label: 'Eng deep-dive', href: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-  { label: 'Speaker one-pager', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+  { label: 'Speaker one-pager', href: 'https://deck.thekaailash.com' },
 ];
 
 export default function MobileNav({ onCommandOpen }) {

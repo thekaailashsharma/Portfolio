@@ -501,7 +501,7 @@ function ConnectPage({ dark, total, pageNum }) {
   const resumes = [
     { label: 'PM résumé', url: 'https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing' },
     { label: 'Engineering', url: 'https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing' },
-    { label: 'Speaker', url: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+    { label: 'Speaker', url: 'https://deck.thekaailash.com' },
   ];
   return (
     <div className="relative h-full px-8 flex flex-col items-center justify-center text-center" style={{ background: dark ? '#131315' : '#f5f2e8' }}>

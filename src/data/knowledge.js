@@ -57,7 +57,7 @@ SKILLS:
 RESUMES:
 - PM Resume: https://drive.google.com/file/d/12GDzn9b11O6LAaxzgUBon7t6f-KelTLE/view?usp=sharing
 - Full Resume: https://drive.google.com/file/d/1kx_fpXjZhOBBNHZmW3nawCmdDOFxEqj0/view?usp=sharing
-- Speaker/CFP Resume: https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing
+- Speaker/CFP Resume: https://deck.thekaailash.com
 
 CONTACT:
 - Email: kailashps.1011@gmail.com

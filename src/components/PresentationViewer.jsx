@@ -157,7 +157,7 @@ const slides = [
               className="px-3 py-2 rounded-lg border border-surface-3/50 hover:border-accent/30 transition-all text-center">
               <span className="font-mono text-[10px] dark:text-zinc-400 text-stone-500 block">For Generalists</span>
             </a>
-            <a href="https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+            <a href="https://deck.thekaailash.com" target="_blank" rel="noopener noreferrer"
               className="px-3 py-2 rounded-lg border border-surface-3/50 hover:border-accent/30 transition-all text-center">
               <span className="font-mono text-[10px] dark:text-zinc-400 text-stone-500 block">For Organizers</span>
             </a>

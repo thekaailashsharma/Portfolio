@@ -28,7 +28,7 @@ const PERSONAS = {
     label: 'Event Organizers',
     heroSubtitle: '10+ conferences. I bring energy and real stories, not slides. Builder-first talks that actually help people ship.',
     sectionOrder: ['speaking', 'writing', 'timeline', 'systems', 'about'],
-    resume: { label: 'For Event Organizers', href: 'https://drive.google.com/file/d/169q0McYJEIDftS9-kXMRrdQbWMbfS3jZ/view?usp=sharing' },
+    resume: { label: 'For Event Organizers', href: 'https://deck.thekaailash.com' },
     ogTitle: 'Kailash Sharma — Speaker & Mentor',
     ogDescription: '10+ conferences including DevFest, Swift Mumbai, GDG MAD. Builder-first talks grounded in real execution.',
   },

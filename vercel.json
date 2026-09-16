@@ -1,6 +1,11 @@
 {
   "rewrites": [
     { "source": "/deck", "destination": "/deck.pdf" },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "deck.thekaailash.com" }],
+      "destination": "/deck.pdf"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
